@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}JEE/NEET Prep Platform{% endblock %}</title>
+    <!-- We will inject your premium UI CSS here -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">JEE/NEET Prep</div>
+        <div class="nav-links">
+            {% if user.is_authenticated %}
+                <a href="#">Dashboard</a>
+                <a href="#">Courses</a>
+                <a href="#">Exams</a>
+                <a href="#">Logout</a>
+            {% else %}
+                <a href="#">Login</a>
+                <a href="#">Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main class="content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 JEE/NEET Prep Platform</p>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
