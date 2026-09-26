@@ -22,11 +22,8 @@ export default function LoginPage() {
     if (phoneNumber.length < 10) return;
     setIsLoading(true);
     try {
-      await fetch("http://localhost:8000/api/users/send-otp/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone_number: phoneNumber })
-      });
+      // Fake network delay
+      await new Promise(resolve => setTimeout(resolve, 800));
       setMethod("otp");
     } catch (error) {
       console.error(error);
@@ -37,14 +34,10 @@ export default function LoginPage() {
 
   const handleOtpComplete = async (code: string) => {
     try {
-      const res = await fetch("http://localhost:8000/api/users/verify-otp/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone_number: phoneNumber, otp: code })
-      });
-      if (res.ok) {
-        const data = await res.json();
-        localStorage.setItem("access_token", data.access);
+      // Fake network delay
+      await new Promise(resolve => setTimeout(resolve, 800));
+      if (code === "123456" || code.length === 6) {
+        localStorage.setItem("access_token", "fake-jwt-token");
         setOtpStatus("success");
         setTimeout(() => { window.location.href = "/dashboard"; }, 1000);
       } else {
