@@ -3,7 +3,7 @@
 import { useState } from "react";
 import JellyRadio from "@/components/JellyRadio";
 import BellToggle from "@/components/BellToggle";
-import SlideCommit from "@/components/SlideCommit";
+
 import FolderFloat from "@/components/FolderFloat";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { BookOpen01Icon, AnalyticsUpIcon, UserCircleIcon, PlayIcon, File02Icon, ArrowRight02Icon, Tick02Icon } from "@hugeicons/core-free-icons";
@@ -185,12 +185,12 @@ export default function DashboardPage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {courses.map((course) => (
-              <div key={course.id} className="bg-[#0a0a0a] border border-white/[0.06] rounded-[32px] p-8 flex flex-col relative overflow-hidden group hover:border-white/20 transition-all duration-500 shadow-2xl shadow-black/50">
+              <div key={course.id} className="bg-[#0a0a0a] border border-white/[0.06] rounded-[32px] p-8 flex flex-col relative group hover:border-white/20 transition-all duration-500 shadow-2xl shadow-black/50">
                 <div className={`absolute top-0 right-0 w-64 h-64 blur-[100px] rounded-full pointer-events-none opacity-20 ${getColorClass(course.color).split(' ')[0]}`} />
                 
                 {/* Embedded FolderFloat Animation */}
-                <div className="w-full h-48 mb-8 rounded-2xl bg-[#050505] border border-white/[0.04] flex items-center justify-center overflow-hidden relative shadow-inner">
-                  <div className="scale-[0.85] origin-center">
+                <div className="w-full h-56 mb-8 rounded-2xl bg-[#050505] border border-white/[0.04] flex items-end pb-4 justify-center relative shadow-inner">
+                  <div className="scale-[0.85] origin-bottom relative z-10">
                     <FolderFloat 
                       label="Hover to reveal contents" 
                       items={course.materials} 
@@ -202,7 +202,7 @@ export default function DashboardPage() {
                   </div>
                 </div>
                 
-                <div className="flex flex-col gap-4 z-10 flex-1">
+                <div className="flex flex-col gap-4 z-10 flex-1 relative">
                   <div className="flex justify-between items-start">
                     <div className={`w-14 h-14 rounded-2xl flex items-center justify-center border ${getColorClass(course.color)} shadow-inner`}>
                       <HugeiconsIcon icon={BookOpen01Icon} size={28} />
@@ -214,22 +214,18 @@ export default function DashboardPage() {
                   </div>
                 </div>
                 
-                <div className="z-10 mt-auto pt-6 border-t border-white/[0.04]">
+                <div className="z-10 mt-auto pt-6 border-t border-white/[0.04] relative">
                   <div className="flex items-center justify-between mb-6">
                     <span className="text-sm font-medium text-zinc-500 uppercase tracking-widest">Total Price</span>
                     <span className="text-2xl font-black text-white">{course.price}</span>
                   </div>
-                  <SlideCommit 
-                    label="Slide to Pay" 
-                    doneLabel="Verified"
-                    width={"100%" as any} 
-                    height={56}
-                    radius={20 as any}
-                    onConfirm={() => handlePayment(course)} 
-                    successColor="#22c55e"
-                    handleColor="#ffffff"
-                    trackColor="#1a1a1a"
-                  />
+                  <button
+                    onClick={() => handlePayment(course)}
+                    className="w-full h-14 rounded-[20px] bg-white text-black font-semibold text-lg hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+                  >
+                    Enroll Now
+                    <HugeiconsIcon icon={ArrowRight02Icon} size={20} />
+                  </button>
                 </div>
               </div>
             ))}
