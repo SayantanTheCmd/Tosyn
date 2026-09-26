@@ -22,6 +22,30 @@ const Chip = forwardRef(function Chip({ mv, children, ...rest }, ref) {
   );
 });
 
+/**
+ * @param {Object} props
+ * @param {Array<any>} [props.items]
+ * @param {string} [props.value]
+ * @param {string} [props.defaultValue]
+ * @param {Function} [props.onChange]
+ * @param {string} [props.chipColor]
+ * @param {string} [props.activeColor]
+ * @param {string} [props.textColor]
+ * @param {string} [props.activeTextColor]
+ * @param {string} [props.size]
+ * @param {number} [props.gap]
+ * @param {number} [props.radius]
+ * @param {number} [props.swell]
+ * @param {number} [props.barge]
+ * @param {number} [props.shrink]
+ * @param {number} [props.jelly]
+ * @param {number} [props.bounce]
+ * @param {number} [props.stagger]
+ * @param {number} [props.stiffness]
+ * @param {boolean} [props.disabled]
+ * @param {string} [props.ariaLabel]
+ * @param {string} [props.className]
+ */
 export default function JellyRadio({
   items = DEFAULT_ITEMS,
   value,

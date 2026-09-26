@@ -222,7 +222,7 @@ export default function DashboardPage() {
                   <SlideCommit 
                     label="Slide to Pay" 
                     doneLabel="Verified"
-                    width="100%" 
+                    width={"100%" as any} 
                     height={56}
                     radius={20 as any}
                     onConfirm={() => handlePayment(course)} 

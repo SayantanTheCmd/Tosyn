@@ -38,6 +38,30 @@ const Spinner = ({ size }) => (
   </svg>
 );
 
+/**
+ * @param {Object} props
+ * @param {string} [props.label]
+ * @param {string} [props.doneLabel]
+ * @param {string} [props.errorLabel]
+ * @param {Function} [props.onConfirm]
+ * @param {Function} [props.onDone]
+ * @param {Function} [props.onError]
+ * @param {string} [props.trackColor]
+ * @param {string} [props.handleColor]
+ * @param {string} [props.successColor]
+ * @param {string} [props.dangerColor]
+ * @param {number|string} [props.width]
+ * @param {number} [props.height]
+ * @param {number} [props.radius]
+ * @param {number} [props.speed]
+ * @param {number} [props.returnBounce]
+ * @param {number} [props.landingDip]
+ * @param {number} [props.holdMs]
+ * @param {boolean} [props.disabled]
+ * @param {React.ReactNode} [props.icon]
+ * @param {React.ReactNode} [props.doneIcon]
+ * @param {string} [props.className]
+ */
 export default function SlideCommit({
   label = 'Slide to pay',
   doneLabel = 'Paid',
