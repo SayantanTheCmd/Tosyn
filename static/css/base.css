@@ -1,0 +1,29 @@
+/* Base styles - will be replaced by premium UI elements */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #333;
+    color: white;
+    padding: 1rem 2rem;
+}
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1rem;
+}
+.content {
+    padding: 2rem;
+    min-height: 80vh;
+}
+footer {
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+}
