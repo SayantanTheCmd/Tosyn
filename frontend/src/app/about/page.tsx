@@ -26,7 +26,7 @@ export default function AboutPage() {
       badgeColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
       avatarBg: "from-blue-600 to-indigo-600",
       description:
-        "Building ToSyn with a single mission: to provide JEE & NEET aspirants with a focused, distraction-free environment for pure question practice, high-yield revision, and active recall.",
+        "Building RankTorque with a single mission: to provide JEE & NEET aspirants with a focused, distraction-free environment for pure question practice, high-yield revision, and active recall.",
       instagram: "https://instagram.com",
       instagramHandle: "@sayantan",
       github: "https://github.com",
@@ -61,7 +61,7 @@ export default function AboutPage() {
             <HugeiconsIcon icon={ArrowLeft02Icon} size={18} />
           </button>
           <h1 className="text-xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400">
-            ToSyn <span className="text-xs text-zinc-500 font-medium ml-1">/ About &amp; Contact</span>
+            RankTorque <span className="text-xs text-zinc-500 font-medium ml-1">/ About &amp; Contact</span>
           </h1>
         </div>
 
@@ -92,7 +92,7 @@ export default function AboutPage() {
             transition={{ duration: 0.4, delay: 0.05 }}
             className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4"
           >
-            Behind ToSyn
+            Behind RankTorque
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
@@ -100,7 +100,7 @@ export default function AboutPage() {
             transition={{ duration: 0.4, delay: 0.1 }}
             className="text-zinc-400 text-base leading-relaxed"
           >
-            ToSyn is engineered to replace distracting test portals with a clean, high-density command center: chapterwise PYQs, dynamic priority revision, and simulated full-syllabus mock exams.
+            RankTorque is engineered to replace distracting test portals with a clean, high-density command center: chapterwise PYQs, dynamic priority revision, and simulated full-syllabus mock exams.
           </motion.p>
         </section>
 
