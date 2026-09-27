@@ -2,8 +2,16 @@
 
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
+import WarmTooltip from "@/components/WarmTooltip";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { ArrowLeft01Icon, Time01Icon, HelpCircleIcon, Alert02Icon } from "@hugeicons/core-free-icons";
+import {
+  ArrowLeft01Icon,
+  Time01Icon,
+  HelpCircleIcon,
+  Alert02Icon,
+  PencilEdit02Icon,
+  Delete02Icon
+} from "@hugeicons/core-free-icons";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Mock Question Bank
@@ -35,7 +43,9 @@ export default function PYQTestPage() {
   const [status, setStatus] = useState<Record<number, "answered" | "review" | "unanswered" | "not_visited">>({});
   const [timeLeft, setTimeLeft] = useState(3600); // 60 mins
   const [showQuitModal, setShowQuitModal] = useState(false);
-  
+  const [sidebarTab, setSidebarTab] = useState<"palette" | "roughwork">("palette");
+  const [roughText, setRoughText] = useState("Exam RoughWork:\n");
+
   useEffect(() => {
     // Initialize status
     const initStatus: any = {};
@@ -82,9 +92,8 @@ export default function PYQTestPage() {
 
   const jumpToQuestion = (idx: number) => {
     const isAnswered = answers[currentQ] !== undefined;
-    // Save current state before jumping if not already marked for review
     if (status[currentQ] !== "review") {
-        setStatus(prev => ({ ...prev, [currentQ]: isAnswered ? "answered" : "unanswered" }));
+      setStatus(prev => ({ ...prev, [currentQ]: isAnswered ? "answered" : "unanswered" }));
     }
     setCurrentQ(idx);
     setStatus(prev => ({ ...prev, [idx]: prev[idx] === "not_visited" ? "unanswered" : prev[idx] }));
@@ -197,53 +206,107 @@ export default function PYQTestPage() {
               Mark for Review
             </button>
             <button onClick={saveAndNext} className="px-8 py-3 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-500 transition-all shadow-lg shadow-blue-900/50">
-              Save & Next
+              Save &amp; Next
             </button>
           </div>
         </div>
 
-        {/* Right Palette */}
-        <div className="w-[320px] bg-[#0a0a0a] flex flex-col">
-          <div className="p-6 border-b border-white/[0.04]">
-            <h3 className="font-semibold text-white mb-4">Question Palette</h3>
-            <div className="grid grid-cols-2 gap-3 text-xs text-zinc-400">
-              <div className="flex items-center gap-2"><div className="w-4 h-4 rounded-full bg-green-500"></div> Answered</div>
-              <div className="flex items-center gap-2"><div className="w-4 h-4 rounded-full bg-red-500"></div> Not Answered</div>
-              <div className="flex items-center gap-2"><div className="w-4 h-4 rounded-full bg-orange-500"></div> Review</div>
-              <div className="flex items-center gap-2"><div className="w-4 h-4 rounded-full bg-zinc-700"></div> Not Visited</div>
-            </div>
-          </div>
-          
-          <div className="flex-1 overflow-y-auto p-6">
-            <div className="grid grid-cols-4 gap-3">
-              {questions.map((_: any, idx: number) => {
-                const s = status[idx];
-                let bg = "bg-zinc-800 border-zinc-700 text-zinc-400"; // not visited
-                if (s === "answered") bg = "bg-green-500 border-green-400 text-white shadow-lg shadow-green-900/50";
-                if (s === "unanswered") bg = "bg-red-500 border-red-400 text-white";
-                if (s === "review") bg = "bg-orange-500 border-orange-400 text-white";
-                
-                // Highlight current
-                const isCurrent = currentQ === idx;
-                
-                return (
-                  <button 
-                    key={idx}
-                    onClick={() => jumpToQuestion(idx)}
-                    className={`w-12 h-12 rounded-full border flex items-center justify-center font-bold transition-all ${bg} ${isCurrent ? 'ring-2 ring-white ring-offset-2 ring-offset-[#0a0a0a]' : ''}`}
-                  >
-                    {idx + 1}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-          
-          <div className="p-6 border-t border-white/[0.04]">
-            <button className="w-full py-4 rounded-xl bg-green-600 text-white font-bold tracking-widest hover:bg-green-500 transition-all shadow-lg shadow-green-900/50">
-              SUBMIT TEST
+        {/* Right Sidebar: Palette or RoughWork */}
+        <div className="w-[340px] bg-[#0a0a0a] flex flex-col">
+          {/* Sidebar Tabs */}
+          <div className="flex border-b border-white/[0.06] bg-black/40 p-2 gap-2">
+            <button
+              onClick={() => setSidebarTab("palette")}
+              className={`flex-1 py-2 text-xs font-bold rounded-lg transition-colors ${sidebarTab === "palette" ? "bg-white/10 text-white" : "text-zinc-500 hover:text-zinc-300"}`}
+            >
+              Question Palette
+            </button>
+            <button
+              onClick={() => setSidebarTab("roughwork")}
+              className={`flex-1 py-2 text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-1.5 ${sidebarTab === "roughwork" ? "bg-blue-600 text-white" : "text-zinc-500 hover:text-zinc-300"}`}
+            >
+              <HugeiconsIcon icon={PencilEdit02Icon} size={14} />
+              <span>RoughWork</span>
             </button>
           </div>
+
+          {sidebarTab === "palette" ? (
+            <>
+              <div className="p-6 border-b border-white/[0.04]">
+                <h3 className="font-semibold text-white mb-4">Question Palette</h3>
+                <div className="grid grid-cols-2 gap-3 text-xs text-zinc-400">
+                  <div className="flex items-center gap-2"><div className="w-4 h-4 rounded-full bg-green-500"></div> Answered</div>
+                  <div className="flex items-center gap-2"><div className="w-4 h-4 rounded-full bg-red-500"></div> Not Answered</div>
+                  <div className="flex items-center gap-2"><div className="w-4 h-4 rounded-full bg-orange-500"></div> Review</div>
+                  <div className="flex items-center gap-2"><div className="w-4 h-4 rounded-full bg-zinc-700"></div> Not Visited</div>
+                </div>
+              </div>
+              
+              <div className="flex-1 overflow-y-auto p-6">
+                <div className="grid grid-cols-4 gap-3">
+                  {questions.map((_: any, idx: number) => {
+                    const s = status[idx];
+                    let bg = "bg-zinc-800 border-zinc-700 text-zinc-400"; // not visited
+                    if (s === "answered") bg = "bg-green-500 border-green-400 text-white shadow-lg shadow-green-900/50";
+                    if (s === "unanswered") bg = "bg-red-500 border-red-400 text-white";
+                    if (s === "review") bg = "bg-orange-500 border-orange-400 text-white";
+                    
+                    const isCurrent = currentQ === idx;
+                    
+                    return (
+                      <button 
+                        key={idx}
+                        onClick={() => jumpToQuestion(idx)}
+                        className={`w-12 h-12 rounded-full border flex items-center justify-center font-bold transition-all ${bg} ${isCurrent ? 'ring-2 ring-white ring-offset-2 ring-offset-[#0a0a0a]' : ''}`}
+                      >
+                        {idx + 1}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="p-6 border-t border-white/[0.04]">
+                <button className="w-full py-4 rounded-xl bg-green-600 text-white font-bold tracking-widest hover:bg-green-500 transition-all shadow-lg shadow-green-900/50">
+                  SUBMIT TEST
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="flex-1 flex flex-col p-6 gap-4">
+              <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
+                <h3 className="text-sm font-bold text-white">Exam Scratchpad</h3>
+                <div className="flex items-center gap-1.5">
+                  <WarmTooltip content="Insert Physics formula" side="top">
+                    <button
+                      type="button"
+                      onClick={() => setRoughText(prev => prev + "\n[PHY] v = u + at")}
+                      className="px-2 py-1 rounded bg-white/5 hover:bg-white/10 text-zinc-400 text-[10px] font-bold"
+                    >
+                      PHY
+                    </button>
+                  </WarmTooltip>
+                  <WarmTooltip content="Clear scratchpad" side="top">
+                    <button
+                      type="button"
+                      onClick={() => setRoughText("Exam RoughWork:\n")}
+                      className="p-1.5 rounded bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-rose-400"
+                    >
+                      <HugeiconsIcon icon={Delete02Icon} size={14} />
+                    </button>
+                  </WarmTooltip>
+                </div>
+              </div>
+
+              <textarea
+                value={roughText}
+                onChange={e => setRoughText(e.target.value)}
+                placeholder="Type temporary working..."
+                rows={16}
+                className="flex-1 w-full bg-[#050505] border border-white/5 rounded-2xl p-4 text-xs font-mono text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-blue-500/50 resize-none leading-relaxed shadow-inner"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

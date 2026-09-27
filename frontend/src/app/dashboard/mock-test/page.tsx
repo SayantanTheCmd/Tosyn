@@ -3,8 +3,15 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Stepper, { Step } from "@/components/Stepper";
+import WarmTooltip from "@/components/WarmTooltip";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { ArrowLeft02Icon, Tick02Icon, Alert02Icon } from "@hugeicons/core-free-icons";
+import {
+  ArrowLeft02Icon,
+  Tick02Icon,
+  Alert02Icon,
+  PencilEdit02Icon,
+  Delete02Icon
+} from "@hugeicons/core-free-icons";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function MockTestPage() {
@@ -12,6 +19,9 @@ export default function MockTestPage() {
   const [completed, setCompleted] = useState(false);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [showQuitModal, setShowQuitModal] = useState(false);
+
+  // Exam RoughWork state
+  const [roughText, setRoughText] = useState("RoughWork Scratchpad:\n- Q1: ");
 
   const questions = [
     {
@@ -81,7 +91,7 @@ export default function MockTestPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#050505] text-white flex flex-col p-8 font-sans relative">
+    <main className="min-h-screen bg-[#050505] text-white flex flex-col p-6 md:p-8 font-sans relative">
       {/* Quit Warning Modal */}
       <AnimatePresence>
         {showQuitModal && (
@@ -127,7 +137,7 @@ export default function MockTestPage() {
 
       <button 
         onClick={handleBackClick}
-        className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors w-fit mb-12 group"
+        className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors w-fit mb-8 group"
       >
         <div className="w-8 h-8 rounded-full bg-white/5 group-hover:bg-white/10 flex items-center justify-center transition-colors">
           <HugeiconsIcon icon={ArrowLeft02Icon} size={18} />
@@ -135,56 +145,122 @@ export default function MockTestPage() {
         <span className="text-sm font-medium">Back to Dashboard</span>
       </button>
 
-      <div className="max-w-4xl w-full mx-auto">
-        <div className="mb-12">
-          <h1 className="text-3xl font-bold tracking-tight mb-2">AITS - Full Syllabus Mock 1</h1>
-          <p className="text-zinc-500">Physics Section • 3 Questions</p>
+      {/* Main Grid: Exam Stepper on Left, RoughWork Panel on Right */}
+      <div className="max-w-[1500px] w-full mx-auto grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+        
+        {/* Left Area: Test Stepper */}
+        <div className="xl:col-span-8 flex flex-col gap-6">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight mb-1">AITS - Full Syllabus Mock 1</h1>
+            <p className="text-zinc-500 text-sm">Physics Section • 3 Questions</p>
+          </div>
+
+          <div className="bg-[#0a0a0a] border border-white/5 rounded-[32px] p-8 md:p-10 shadow-2xl shadow-black/50">
+            <Stepper
+              initialStep={1}
+              onFinalStepCompleted={() => setCompleted(true)}
+              backButtonText="Previous Question"
+              nextButtonText="Next Question"
+              stepCircleContainerClassName="mb-10"
+            >
+              {questions.map((q) => (
+                <Step key={q.id}>
+                  <div className="flex flex-col min-h-[300px]">
+                    <h2 className="text-2xl font-semibold mb-8 text-white leading-relaxed">
+                      <span className="text-blue-500 mr-3">Q{q.id}.</span> 
+                      {q.question}
+                    </h2>
+                    
+                    <div className="flex flex-col gap-4 flex-1">
+                      {q.options.map((opt, j) => (
+                        <button
+                          key={j}
+                          onClick={() => handleSelect(q.id, opt)}
+                          className={`flex items-center justify-between w-full p-5 rounded-2xl border transition-all text-left ${
+                            answers[q.id] === opt 
+                              ? "bg-blue-500/10 border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.15)]" 
+                              : "bg-white/[0.02] border-white/5 hover:bg-white/[0.04] hover:border-white/20"
+                          }`}
+                        >
+                          <span className={`text-lg ${answers[q.id] === opt ? "text-blue-400 font-medium" : "text-zinc-300"}`}>
+                            {opt}
+                          </span>
+                          
+                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${
+                            answers[q.id] === opt ? "border-blue-500 bg-blue-500" : "border-zinc-700"
+                          }`}>
+                            {answers[q.id] === opt && <div className="w-2 h-2 rounded-full bg-white" />}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </Step>
+              ))}
+            </Stepper>
+          </div>
         </div>
 
-        <div className="bg-[#0a0a0a] border border-white/5 rounded-[32px] p-8 md:p-12 shadow-2xl shadow-black/50">
-          <Stepper
-            initialStep={1}
-            onFinalStepCompleted={() => setCompleted(true)}
-            backButtonText="Previous Question"
-            nextButtonText="Next Question"
-            stepCircleContainerClassName="mb-12"
-          >
-            {questions.map((q) => (
-              <Step key={q.id}>
-                <div className="flex flex-col min-h-[300px]">
-                  <h2 className="text-2xl font-semibold mb-8 text-white leading-relaxed">
-                    <span className="text-blue-500 mr-3">Q{q.id}.</span> 
-                    {q.question}
-                  </h2>
-                  
-                  <div className="flex flex-col gap-4 flex-1">
-                    {q.options.map((opt, j) => (
-                      <button
-                        key={j}
-                        onClick={() => handleSelect(q.id, opt)}
-                        className={`flex items-center justify-between w-full p-5 rounded-2xl border transition-all text-left ${
-                          answers[q.id] === opt 
-                            ? "bg-blue-500/10 border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.15)]" 
-                            : "bg-white/[0.02] border-white/5 hover:bg-white/[0.04] hover:border-white/20"
-                        }`}
-                      >
-                        <span className={`text-lg ${answers[q.id] === opt ? "text-blue-400 font-medium" : "text-zinc-300"}`}>
-                          {opt}
-                        </span>
-                        
-                        <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${
-                          answers[q.id] === opt ? "border-blue-500 bg-blue-500" : "border-zinc-700"
-                        }`}>
-                          {answers[q.id] === opt && <div className="w-2 h-2 rounded-full bg-white" />}
-                        </div>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </Step>
-            ))}
-          </Stepper>
+        {/* Right Area: Dedicated Exam RoughWork Panel */}
+        <div className="xl:col-span-4 bg-[#0a0a0a] border border-white/[0.06] rounded-[32px] p-6 shadow-2xl flex flex-col gap-5 sticky top-8">
+          <div className="flex items-center justify-between border-b border-white/[0.06] pb-4">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center border border-blue-500/20">
+                <HugeiconsIcon icon={PencilEdit02Icon} size={16} />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-white tracking-tight">RoughWork</h3>
+                <p className="text-[11px] text-zinc-500">Live scratchpad during test</p>
+              </div>
+            </div>
+
+            {/* Quick Insert Tools with WarmTooltip */}
+            <div className="flex items-center gap-1.5">
+              <WarmTooltip content="Insert Physics formula" side="top">
+                <button
+                  type="button"
+                  onClick={() => setRoughText(prev => prev + "\n[PHY] v = u + at | F = ma")}
+                  className="px-2 py-1 rounded-md bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white transition-colors text-[10px] font-bold"
+                >
+                  PHY
+                </button>
+              </WarmTooltip>
+
+              <WarmTooltip content="Insert Chemistry formula" side="top">
+                <button
+                  type="button"
+                  onClick={() => setRoughText(prev => prev + "\n[CHM] PV = nRT | pH = -log[H+]")}
+                  className="px-2 py-1 rounded-md bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white transition-colors text-[10px] font-bold"
+                >
+                  CHM
+                </button>
+              </WarmTooltip>
+
+              <WarmTooltip content="Clear scratchpad" side="top">
+                <button
+                  type="button"
+                  onClick={() => setRoughText("RoughWork Scratchpad:\n")}
+                  className="p-1.5 rounded-md bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-rose-400 transition-colors"
+                >
+                  <HugeiconsIcon icon={Delete02Icon} size={14} />
+                </button>
+              </WarmTooltip>
+            </div>
+          </div>
+
+          <textarea
+            value={roughText}
+            onChange={e => setRoughText(e.target.value)}
+            placeholder="Work out your step-by-step calculations here..."
+            rows={14}
+            className="w-full bg-[#050505] border border-white/5 rounded-2xl p-4 text-xs font-mono text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-blue-500/50 resize-none leading-relaxed shadow-inner"
+          />
+
+          <p className="text-[11px] text-zinc-500 italic text-center">
+            Scratchpad stays active while navigating questions.
+          </p>
         </div>
+
       </div>
     </main>
   );
