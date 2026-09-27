@@ -76,6 +76,10 @@ export default function PYQTestPage() {
     return matchSubject && matchClass && matchYear;
   });
 
+  // Practice Mode: "study" (Self-paced study & instant derivation reveal) | "timed" (Timed exam)
+  const [practiceMode, setPracticeMode] = useState<"study" | "timed">("study");
+  const [showSolution, setShowSolution] = useState<Record<number, boolean>>({});
+
   // Start Practice Test
   const handleStartTest = (sessionToStart?: PaperSession) => {
     let pool = AUTHENTIC_PYQS[selectedSubject] || AUTHENTIC_PYQS.physics;
@@ -92,8 +96,8 @@ export default function PYQTestPage() {
       if (filteredYear.length > 0) pool = filteredYear;
     }
 
-    // Ensure we have questions
-    const testQuestions = pool.slice(0, 5);
+    // Load full pool of authentic past paper questions
+    const testQuestions = pool;
     setActiveQuestions(testQuestions);
     
     // Initialize Status
@@ -105,8 +109,9 @@ export default function PYQTestPage() {
     setStatus(initStatus);
     
     setAnswers({});
+    setShowSolution({});
     setCurrentQIndex(0);
-    const duration = (sessionToStart?.timeMinutes || 15) * 60;
+    const duration = (sessionToStart?.timeMinutes || 60) * 60;
     setTimeLeft(duration);
     setInitialTime(duration);
     setMode("test");
@@ -254,6 +259,44 @@ export default function PYQTestPage() {
 
           <main className="flex-1 max-w-5xl w-full mx-auto p-6 md:p-10 flex flex-col gap-8">
             
+            {/* Mode Banner: Study vs Timed */}
+            <div className="bg-[#0a0a0a] border border-blue-500/20 p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg shadow-blue-950/20">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center font-bold">
+                  <HugeiconsIcon icon={BookOpen01Icon} size={20} />
+                </div>
+                <div>
+                  <h3 className="text-sm font-bold text-white">Practice Workflow Mode</h3>
+                  <p className="text-xs text-zinc-400">Choose between self-paced problem solving or timed exam simulation</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 bg-black/50 p-1 rounded-xl border border-white/10 w-full sm:w-auto">
+                <button
+                  type="button"
+                  onClick={() => setPracticeMode("study")}
+                  className={`flex-1 sm:flex-initial px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                    practiceMode === "study"
+                      ? "bg-blue-600 text-white shadow-md shadow-blue-600/30"
+                      : "text-zinc-400 hover:text-white"
+                  }`}
+                >
+                  ⚡ Self-Paced Study (Instant Hints & Derivations)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPracticeMode("timed")}
+                  className={`flex-1 sm:flex-initial px-4 py-2 rounded-lg text-xs font-bold transition-all ${
+                    practiceMode === "timed"
+                      ? "bg-amber-600 text-white shadow-md shadow-amber-600/30"
+                      : "text-zinc-400 hover:text-white"
+                  }`}
+                >
+                  ⏱️ Timed Paper Test (Exam Conditions)
+                </button>
+              </div>
+            </div>
+
             {/* Step 1: Select Subject */}
             <section className="flex flex-col gap-3">
               <label className="text-xs font-bold text-zinc-400 uppercase tracking-widest flex items-center gap-2">
@@ -600,24 +643,70 @@ export default function PYQTestPage() {
                 <div className="flex flex-col gap-4">
                   {activeQuestions[currentQIndex].options.map((opt, idx) => {
                     const isSelected = answers[currentQIndex] === idx;
+                    const isCorrect = idx === activeQuestions[currentQIndex].correctOptionIndex;
+                    const isStudyMode = practiceMode === "study";
+                    const hasAnswered = answers[currentQIndex] !== undefined;
+
+                    let btnStyle = "bg-[#0a0a0a] border-white/10 hover:border-white/30";
+                    let badgeStyle = "border-zinc-600 text-zinc-500";
+                    let textStyle = "text-zinc-300";
+
+                    if (isStudyMode && hasAnswered) {
+                      if (isCorrect) {
+                        btnStyle = "bg-emerald-500/15 border-emerald-500/60 shadow-md shadow-emerald-950/40";
+                        badgeStyle = "border-emerald-400 text-emerald-400 bg-emerald-500/20";
+                        textStyle = "text-emerald-200 font-semibold";
+                      } else if (isSelected) {
+                        btnStyle = "bg-rose-500/15 border-rose-500/60 shadow-md shadow-rose-950/40";
+                        badgeStyle = "border-rose-400 text-rose-400 bg-rose-500/20";
+                        textStyle = "text-rose-200 font-semibold";
+                      }
+                    } else if (isSelected) {
+                      btnStyle = "bg-blue-600/20 border-blue-500/50 shadow-md";
+                      badgeStyle = "border-blue-400 text-blue-400 bg-blue-500/20";
+                      textStyle = "text-blue-100 font-medium";
+                    }
+
                     return (
                       <button 
                         key={idx}
                         onClick={() => handleOptionSelect(idx)}
-                        className={`flex items-center gap-4 p-4 rounded-xl border transition-all text-left ${
-                          isSelected ? 'bg-blue-600/20 border-blue-500/50 shadow-md' : 'bg-[#0a0a0a] border-white/10 hover:border-white/30'
-                        }`}
+                        className={`flex items-center gap-4 p-4 rounded-xl border transition-all text-left ${btnStyle}`}
                       >
-                        <div className={`w-7 h-7 rounded-full border flex items-center justify-center text-xs font-bold shrink-0 ${
-                          isSelected ? 'border-blue-400 text-blue-400 bg-blue-500/20' : 'border-zinc-600 text-zinc-500'
-                        }`}>
+                        <div className={`w-7 h-7 rounded-full border flex items-center justify-center text-xs font-bold shrink-0 ${badgeStyle}`}>
                           {String.fromCharCode(65 + idx)}
                         </div>
-                        <span className={isSelected ? 'text-blue-100 font-medium text-base' : 'text-zinc-300 text-base'}>{opt}</span>
+                        <span className={`text-base ${textStyle}`}>{opt}</span>
                       </button>
                     );
                   })}
                 </div>
+
+                {/* Instant Solution & Formula Derivation Box (Available in Study Mode) */}
+                {practiceMode === "study" && (
+                  <div className="mt-6 flex flex-col gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setShowSolution(prev => ({ ...prev, [currentQIndex]: !prev[currentQIndex] }))}
+                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border border-blue-500/20 text-xs font-bold transition-all w-fit"
+                    >
+                      <HugeiconsIcon icon={BookOpen01Icon} size={16} />
+                      <span>{showSolution[currentQIndex] ? "Hide Derivation & Solution" : "⚡ View Step-by-Step Derivation & Solution"}</span>
+                    </button>
+
+                    {showSolution[currentQIndex] && (
+                      <div className="p-5 rounded-2xl bg-blue-950/20 border border-blue-500/30 text-xs leading-relaxed text-zinc-200 flex flex-col gap-2">
+                        <div className="flex items-center justify-between text-blue-400 font-bold border-b border-blue-500/20 pb-2">
+                          <span>Official NTA Step-by-Step Derivation:</span>
+                          <span>Correct Option: Option {String.fromCharCode(65 + activeQuestions[currentQIndex].correctOptionIndex)}</span>
+                        </div>
+                        <p className="font-mono text-blue-100 whitespace-pre-wrap leading-relaxed mt-1">
+                          {activeQuestions[currentQIndex].explanation}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               {/* Action Bar */}

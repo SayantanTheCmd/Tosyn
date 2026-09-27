@@ -129,23 +129,58 @@ export default function MockTestPage() {
 
           <main className="flex-1 max-w-6xl w-full mx-auto p-6 md:p-10 flex flex-col gap-8">
             
+            {/* All India Mock Test Series Banner */}
+            <div className="bg-gradient-to-r from-blue-950/40 via-[#0a0a0a] to-purple-950/40 border border-blue-500/20 p-6 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+              <div className="flex flex-col gap-2 max-w-xl">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 text-xs font-bold uppercase tracking-wider w-fit">
+                  <span>🏆 RankTorque All India Mock Series</span>
+                </div>
+                <h2 className="text-2xl font-bold text-white tracking-tight">
+                  Simulated NTA Exam Environment
+                </h2>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Real 15-question chapter tests meticulously crafted for Class XI and XII syllabus. Features live countdown timer, NTA (+4, -1) negative marking, scratchpad notebook, and immediate percentile diagnosis.
+                </p>
+              </div>
+
+              {/* Stats Summary Cards */}
+              <div className="grid grid-cols-2 gap-3 shrink-0">
+                <div className="bg-black/60 border border-white/10 p-3.5 rounded-2xl flex flex-col items-center justify-center text-center">
+                  <span className="text-xl font-bold text-blue-400 font-mono">20</span>
+                  <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">Chapter Mocks</span>
+                </div>
+                <div className="bg-black/60 border border-white/10 p-3.5 rounded-2xl flex flex-col items-center justify-center text-center">
+                  <span className="text-xl font-bold text-purple-400 font-mono">300+</span>
+                  <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">Authentic Qs</span>
+                </div>
+                <div className="bg-black/60 border border-white/10 p-3.5 rounded-2xl flex flex-col items-center justify-center text-center">
+                  <span className="text-xl font-bold text-emerald-400 font-mono">+4 / -1</span>
+                  <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">NTA Pattern</span>
+                </div>
+                <div className="bg-black/60 border border-white/10 p-3.5 rounded-2xl flex flex-col items-center justify-center text-center">
+                  <span className="text-xl font-bold text-amber-400 font-mono">15 Mins</span>
+                  <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">Per Test</span>
+                </div>
+              </div>
+            </div>
+            
             {/* Filter Bar */}
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-[#0a0a0a] border border-white/10 p-5 rounded-2xl">
               {/* Class Filter */}
               <div className="flex items-center gap-2">
-                <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Class Filter:</span>
+                <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Class Curriculum:</span>
                 <div className="flex items-center gap-1.5 bg-black/40 p-1 rounded-xl border border-white/5">
                   {[
                     { id: "all", label: "All Classes" },
-                    { id: "11", label: "Class 11" },
-                    { id: "12", label: "Class 12" }
+                    { id: "11", label: "Class 11 Chapters" },
+                    { id: "12", label: "Class 12 Chapters" }
                   ].map(cls => (
                     <button
                       key={cls.id}
                       type="button"
                       onClick={() => setSelectedClass(cls.id as any)}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
-                        selectedClass === cls.id ? "bg-blue-600 text-white shadow-md" : "text-zinc-400 hover:text-white"
+                      className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                        selectedClass === cls.id ? "bg-blue-600 text-white shadow-md shadow-blue-600/30" : "text-zinc-400 hover:text-white"
                       }`}
                     >
                       {cls.label}
@@ -185,18 +220,23 @@ export default function MockTestPage() {
               {filteredTests.map(test => (
                 <SpotlightCard
                   key={test.id}
-                  className="bg-[#0a0a0a] border border-white/10 rounded-3xl p-6 flex flex-col justify-between gap-5 hover:border-blue-500/40 transition-all cursor-pointer group"
+                  className="bg-[#0a0a0a] border border-white/10 rounded-3xl p-6 flex flex-col justify-between gap-5 hover:border-blue-500/40 transition-all cursor-pointer group shadow-lg hover:shadow-blue-950/20"
                   onClick={() => handleStartTest(test)}
                 >
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center justify-between">
-                      <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
-                        test.classLevel === "11"
-                          ? "bg-purple-500/10 text-purple-400 border-purple-500/20"
-                          : "bg-blue-500/10 text-blue-400 border-blue-500/20"
-                      }`}>
-                        Class {test.classLevel}
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${
+                          test.classLevel === "11"
+                            ? "bg-purple-500/10 text-purple-400 border-purple-500/20"
+                            : "bg-blue-500/10 text-blue-400 border-blue-500/20"
+                        }`}>
+                          Class {test.classLevel}
+                        </span>
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/5 text-zinc-400 border border-white/10">
+                          {test.subject}
+                        </span>
+                      </div>
                       <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                         {test.difficulty}
                       </span>
@@ -206,10 +246,10 @@ export default function MockTestPage() {
                       {test.title}
                     </h3>
 
-                    <div className="flex items-center gap-4 text-xs text-zinc-400 font-mono">
-                      <span>{test.questionsCount} Qs (+4, -1)</span>
+                    <div className="flex items-center justify-between text-xs text-zinc-400 font-mono bg-white/[0.02] border border-white/5 p-2.5 rounded-xl">
+                      <span>{test.questionsCount} Qs (60 Marks)</span>
                       <span>•</span>
-                      <span>{test.durationMinutes} Mins</span>
+                      <span>⏱️ {test.durationMinutes} Mins</span>
                     </div>
                   </div>
 
@@ -219,10 +259,10 @@ export default function MockTestPage() {
                       e.stopPropagation();
                       handleStartTest(test);
                     }}
-                    className="w-full py-3 rounded-2xl bg-white/5 group-hover:bg-blue-600 text-zinc-200 group-hover:text-white text-xs font-bold transition-all border border-white/5 flex items-center justify-center gap-2 shadow-md"
+                    className="w-full py-3 rounded-2xl bg-blue-600/10 group-hover:bg-blue-600 text-blue-400 group-hover:text-white text-xs font-bold transition-all border border-blue-500/20 group-hover:border-blue-600 flex items-center justify-center gap-2 shadow-md"
                   >
                     <HugeiconsIcon icon={BookOpen01Icon} size={16} />
-                    <span>Start Chapter Mock Test</span>
+                    <span>Start Mock Exam →</span>
                   </button>
                 </SpotlightCard>
               ))}

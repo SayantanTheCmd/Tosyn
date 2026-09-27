@@ -27,8 +27,8 @@ export const CHAPTER_MOCK_TESTS: ChapterMockTest[] = [
     subject: "physics",
     classLevel: "11",
     chapter: "Kinematics & Motion",
-    questionsCount: 5,
-    durationMinutes: 15,
+    questionsCount: 15,
+    durationMinutes: 45,
     difficulty: "High Yield",
     examTrack: "BOTH",
     questions: [
@@ -37,35 +37,105 @@ export const CHAPTER_MOCK_TESTS: ChapterMockTest[] = [
         question: "A ball is dropped from a height H. At the same instant, another ball is thrown upwards with velocity U. They meet at a height H/2. The initial velocity U of the second ball is:",
         options: ["√(gH)", "√(2gH)", "2√(gH)", "√(gH/2)"],
         correctOptionIndex: 0,
-        explanation: "Time taken for 1st ball to fall H/2: H/2 = ½ gt² ⇒ t = √(H/g). Distance traveled by 2nd ball in time t: H/2 = Ut - ½ gt² = U√(H/g) - H/2. Thus U√(H/g) = H ⇒ U = √(gH)."
+        explanation: "Time for 1st ball: H/2 = ½ gt² ⇒ t = √(H/g). Distance for 2nd ball: H/2 = U t - ½ gt² = U √(H/g) - H/2 ⇒ U √(H/g) = H ⇒ U = √(gH)."
       },
       {
         id: 2,
         question: "A projectile is fired at an angle of 45° to the horizontal. If the radius of curvature of its trajectory at the highest point is R, the initial velocity is:",
         options: ["√(2gR)", "√(gR)", "2√(gR)", "√(gR/2)"],
         correctOptionIndex: 0,
-        explanation: "At the highest point, speed is v = u cos 45° = u/√2. Centripetal acceleration at top is g. Radius of curvature R = v²/g = (u²/2)/g = u²/(2g). Hence u = √(2gR)."
+        explanation: "At highest point v = u cos 45° = u/√2. Centripetal acceleration is g. R = v²/g = (u²/2)/g ⇒ u = √(2gR)."
       },
       {
         id: 3,
-        question: "A particle moves along x-axis such that its position is given by x = 3t² - 12t + 5 (in meters). The speed of the particle at t = 3 seconds is:",
+        question: "A particle moves along x-axis such that x = 3t² - 12t + 5 (in meters). The speed of the particle at t = 3 seconds is:",
         options: ["6 m/s", "12 m/s", "0 m/s", "18 m/s"],
         correctOptionIndex: 0,
-        explanation: "Velocity v = dx/dt = 6t - 12. At t = 3 s: v = 6(3) - 12 = 18 - 12 = 6 m/s."
+        explanation: "v = dx/dt = 6t - 12. At t = 3 s: v = 6(3) - 12 = 6 m/s."
       },
       {
         id: 4,
-        question: "The angle of projection for a projectile for which the horizontal range and maximum height are equal is:",
+        question: "Angle of projection for which horizontal range and maximum height are equal is:",
         options: ["tan⁻¹(4)", "45°", "60°", "tan⁻¹(2)"],
         correctOptionIndex: 0,
-        explanation: "Range R = (u² sin 2θ)/g = 2u² sin θ cos θ / g. Max height H = u² sin² θ / (2g). Setting R = H: 2 sin θ cos θ = sin² θ / 2 ⇒ tan θ = 4 ⇒ θ = tan⁻¹(4)."
+        explanation: "Range R = 2u² sin θ cos θ / g. H = u² sin² θ / (2g). R = H ⇒ 2 sin θ cos θ = sin² θ / 2 ⇒ tan θ = 4 ⇒ θ = tan⁻¹(4)."
       },
       {
         id: 5,
-        question: "A car accelerates from rest at 2 m/s² for 10 s and then decelerates at 1 m/s² until it stops. Total distance traveled by the car is:",
+        question: "A car accelerates from rest at 2 m/s² for 10 s and then decelerates at 1 m/s² until it stops. Total distance traveled is:",
         options: ["300 m", "200 m", "150 m", "400 m"],
         correctOptionIndex: 0,
-        explanation: "Phase 1: v_max = 0 + 2(10) = 20 m/s. Distance s₁ = ½(2)(10²) = 100 m. Phase 2: Deceleration from 20 m/s to 0 at 1 m/s²: 0 = 20² - 2(1)s₂ ⇒ s₂ = 200 m. Total distance = 100 + 200 = 300 m."
+        explanation: "v_max = 20 m/s. s₁ = ½(2)(10²) = 100 m. Deceleration s₂ = 20² / (2×1) = 200 m. Total = 100 + 200 = 300 m."
+      },
+      {
+        id: 6,
+        question: "Displacement x of a particle varies with time as x = a e^(-α t) + b e^(β t). Its velocity will:",
+        options: ["Go on increasing with time", "Go on decreasing with time", "Be independent of time", "Be zero at t = 0"],
+        correctOptionIndex: 0,
+        explanation: "v = dx/dt = -a α e^(-α t) + b β e^(β t). Acceleration a_acc = d²x/dt² = a α² e^(-α t) + b β² e^(β t) > 0 for all t, so velocity increases."
+      },
+      {
+        id: 7,
+        question: "Ratio of numerical values of average velocity to average speed of a body is always:",
+        options: ["Equal to or less than 1", "Equal to or greater than 1", "Equal to 1", "Less than 1"],
+        correctOptionIndex: 0,
+        explanation: "Displacement ≤ Distance. Hence |Average Velocity| / Average Speed ≤ 1."
+      },
+      {
+        id: 8,
+        question: "A person travels first half distance with speed v₁ and second half with speed v₂. Average speed is:",
+        options: ["2 v₁ v₂ / (v₁ + v₂)", "(v₁ + v₂) / 2", "√(v₁ v₂)", "(v₁² + v₂²) / (v₁ + v₂)"],
+        correctOptionIndex: 0,
+        explanation: "v_avg = Total Distance / Total Time = S / ( (S/2)/v₁ + (S/2)/v₂ ) = 2 v₁ v₂ / (v₁ + v₂)."
+      },
+      {
+        id: 9,
+        question: "Two vectors A and B have equal magnitudes M. If magnitude of (A + B) is M, angle between them is:",
+        options: ["120°", "60°", "90°", "180°"],
+        correctOptionIndex: 0,
+        explanation: "|A + B|² = A² + B² + 2 A B cos θ ⇒ M² = M² + M² + 2 M² cos θ ⇒ 2 M² cos θ = -M² ⇒ cos θ = -1/2 ⇒ θ = 120°."
+      },
+      {
+        id: 10,
+        question: "Time of flight of a projectile is 10 seconds and range is 500 m. Maximum height reached is (g = 10 m/s²):",
+        options: ["125 m", "250 m", "500 m", "62.5 m"],
+        correctOptionIndex: 0,
+        explanation: "T = 2 u_y / g = 10 ⇒ u_y = 50 m/s. H = u_y² / (2g) = 50² / 20 = 2500 / 20 = 125 m."
+      },
+      {
+        id: 11,
+        question: "Position vector of a particle is r = (3t i + 2t² j) m. The magnitude of acceleration of particle at t = 2 s is:",
+        options: ["4 m/s²", "3 m/s²", "5 m/s²", "2 m/s²"],
+        correctOptionIndex: 0,
+        explanation: "v = dr/dt = 3 i + 4t j. a = dv/dt = 0 i + 4 j m/s². Magnitude = 4 m/s²."
+      },
+      {
+        id: 12,
+        question: "A stone tied to a string of length 1 m is whirled in a horizontal circle at constant speed 4 m/s. Centripetal acceleration is:",
+        options: ["16 m/s²", "4 m/s²", "8 m/s²", "2 m/s²"],
+        correctOptionIndex: 0,
+        explanation: "a_c = v² / r = 4² / 1 = 16 m/s²."
+      },
+      {
+        id: 13,
+        question: "A swimmer can swim with speed 4 km/h in still water. He crosses a river 1 km wide flowing at 3 km/h in shortest time. Time taken is:",
+        options: ["15 minutes", "20 minutes", "12 minutes", "30 minutes"],
+        correctOptionIndex: 0,
+        explanation: "Shortest time = Width / v_swimmer = 1 / 4 hour = 15 minutes."
+      },
+      {
+        id: 14,
+        question: "Angle between velocity and acceleration at highest point of projectile motion is:",
+        options: ["90°", "0°", "180°", "45°"],
+        correctOptionIndex: 0,
+        explanation: "At highest point, velocity is horizontal (u cos θ i) and acceleration is downward (-g j), making an angle of 90°."
+      },
+      {
+        id: 15,
+        question: "A body starts from rest with uniform acceleration. Ratio of distances covered in 1st, 2nd, and 3rd seconds is:",
+        options: ["1 : 3 : 5", "1 : 2 : 3", "1 : 4 : 9", "1 : 1 : 1"],
+        correctOptionIndex: 0,
+        explanation: "Distance in nth second s_n = u + ½ a (2n - 1) = ½ a (2n - 1). Ratio s₁ : s₂ : s₃ = 1 : 3 : 5."
       }
     ]
   },
@@ -75,45 +145,115 @@ export const CHAPTER_MOCK_TESTS: ChapterMockTest[] = [
     subject: "physics",
     classLevel: "11",
     chapter: "Laws of Motion & Friction",
-    questionsCount: 5,
-    durationMinutes: 15,
+    questionsCount: 15,
+    durationMinutes: 45,
     difficulty: "Moderate",
     examTrack: "BOTH",
     questions: [
       {
         id: 1,
-        question: "A block of mass 2 kg rests on a rough horizontal surface with coefficient of friction μ = 0.4. If a horizontal force of 6 N is applied, the frictional force acting on the block is (g = 10 m/s²):",
+        question: "Block of mass 2 kg rests on rough horizontal surface (μ = 0.4). Horizontal force of 6 N is applied. Frictional force is (g = 10 m/s²):",
         options: ["6 N", "8 N", "4 N", "0 N"],
         correctOptionIndex: 0,
-        explanation: "Limiting friction f_lim = μ m g = 0.4 × 2 × 10 = 8 N. Applied force (6 N) < f_lim (8 N). Since applied force is less than limiting friction, static friction adjusts to balance applied force, so f = 6 N."
+        explanation: "f_lim = μ N = 0.4 × 20 = 8 N. Applied force 6 N < 8 N ⇒ friction = 6 N."
       },
       {
         id: 2,
-        question: "Two blocks of masses 4 kg and 6 kg connected by a light string rest on a smooth surface. A force of 20 N pulls the 6 kg block. The tension in the string is:",
+        question: "Two blocks 4 kg and 6 kg connected by string rest on smooth surface. Pulling force 20 N acts on 6 kg block. Tension in string is:",
         options: ["8 N", "12 N", "10 N", "4 N"],
         correctOptionIndex: 0,
-        explanation: "Total mass = 4 + 6 = 10 kg. Acceleration a = F / total mass = 20 / 10 = 2 m/s². Tension T pulling the 4 kg block: T = 4 × a = 4 × 2 = 8 N."
+        explanation: "a = 20 / 10 = 2 m/s². Tension T = 4 × 2 = 8 N."
       },
       {
         id: 3,
-        question: "A lift of mass 1000 kg is moving upwards with an acceleration of 2 m/s². The tension in the supporting cable is (g = 9.8 m/s²):",
+        question: "Lift of mass 1000 kg accelerates upwards at 2 m/s². Tension in cable is (g = 9.8 m/s²):",
         options: ["11800 N", "9800 N", "7800 N", "12000 N"],
         correctOptionIndex: 0,
-        explanation: "Tension T - mg = ma ⇒ T = m(g + a) = 1000 × (9.8 + 2) = 1000 × 11.8 = 11800 N."
+        explanation: "T = m(g + a) = 1000 × 11.8 = 11800 N."
       },
       {
         id: 4,
-        question: "A body of mass 5 kg is suspended by two light strings making angles 30° and 60° with the vertical. The tension in the string making 30° with vertical is (g = 10 m/s²):",
+        question: "Mass 5 kg suspended by two strings at 30° and 60° with vertical. Tension in string at 30° with vertical is (g = 10 m/s²):",
         options: ["25√3 N", "25 N", "50 N", "50√3 N"],
         correctOptionIndex: 0,
-        explanation: "Using Lami's theorem or resolving components: T₁ cos 30° + T₂ cos 60° = W = 50 N, and T₁ sin 30° = T₂ sin 60°. T₂ = T₁ / √3. T₁(√3/2) + (T₁/√3)(1/2) = 50 ⇒ T₁ [ (3 + 1)/(2√3) ] = 50 ⇒ T₁ = 25√3 N."
+        explanation: "T₁ cos 30° + T₂ cos 60° = 50 N. Resolving gives T₁ = 25√3 N."
       },
       {
         id: 5,
-        question: "The banking angle for a curved road of radius 50 m to negotiate a speed of 10 m/s safely without relying on friction is (g = 10 m/s²):",
+        question: "Banking angle for road radius 50 m to negotiate speed 10 m/s without friction is (g = 10 m/s²):",
         options: ["tan⁻¹(0.2)", "tan⁻¹(0.5)", "30°", "45°"],
         correctOptionIndex: 0,
-        explanation: "Banking formula tan θ = v² / (r g) = 10² / (50 × 10) = 100 / 500 = 0.2 ⇒ θ = tan⁻¹(0.2)."
+        explanation: "tan θ = v² / (rg) = 100 / 500 = 0.2 ⇒ θ = tan⁻¹(0.2)."
+      },
+      {
+        id: 6,
+        question: "Impulse imparted by a force of 10 N acting on a body for 0.1 seconds is:",
+        options: ["1 N·s", "10 N·s", "100 N·s", "0.1 N·s"],
+        correctOptionIndex: 0,
+        explanation: "Impulse I = F × Δt = 10 × 0.1 = 1 N·s."
+      },
+      {
+        id: 7,
+        question: "Recoil velocity of a gun of mass 4 kg firing a bullet of mass 20 g at 400 m/s is:",
+        options: ["-2 m/s", "-4 m/s", "-1 m/s", "-0.5 m/s"],
+        correctOptionIndex: 0,
+        explanation: "Conservation of momentum: M V + m v = 0 ⇒ 4 V + (0.02)(400) = 0 ⇒ 4 V + 8 = 0 ⇒ V = -2 m/s."
+      },
+      {
+        id: 8,
+        question: "A ball of mass 0.2 kg strikes a wall normally at 10 m/s and rebounds at same speed. Change in momentum is:",
+        options: ["-4 kg m/s", "-2 kg m/s", "0", "-8 kg m/s"],
+        correctOptionIndex: 0,
+        explanation: "Δp = m v_final - m v_initial = (0.2)(-10) - (0.2)(10) = -2 - 2 = -4 kg m/s."
+      },
+      {
+        id: 9,
+        question: "Maximum angle of incline θ for a block to remain at rest on an inclined plane with friction coefficient μ is:",
+        options: ["θ = tan⁻¹(μ)", "θ = sin⁻¹(μ)", "θ = cos⁻¹(μ)", "θ = cot⁻¹(μ)"],
+        correctOptionIndex: 0,
+        explanation: "Angle of repose θ = tan⁻¹(μ)."
+      },
+      {
+        id: 10,
+        question: "A monkey of mass 20 kg climbs up a light rope attached to a tree branch. Maximum tension rope can withstand is 250 N. Max acceleration is (g = 10 m/s²):",
+        options: ["2.5 m/s²", "5 m/s²", "1.25 m/s²", "10 m/s²"],
+        correctOptionIndex: 0,
+        explanation: "T_max = m(g + a) ⇒ 250 = 20(10 + a) ⇒ 12.5 = 10 + a ⇒ a = 2.5 m/s²."
+      },
+      {
+        id: 11,
+        question: "Coefficient of static friction between two surfaces depends on:",
+        options: ["Nature of surfaces in contact", "Area of contact", "Normal reaction", "Speed"],
+        correctOptionIndex: 0,
+        explanation: "Friction coefficient μ depends only on material roughness and nature of contacting surfaces."
+      },
+      {
+        id: 12,
+        question: "A rocket of initial mass 1000 kg burns fuel at rate 10 kg/s with exhaust velocity 50 m/s. Initial thrust force is:",
+        options: ["500 N", "1000 N", "5000 N", "100 N"],
+        correctOptionIndex: 0,
+        explanation: "Thrust F = v_rel (dm/dt) = 50 × 10 = 500 N."
+      },
+      {
+        id: 13,
+        question: "Action and Reaction forces according to Newton's Third Law:",
+        options: ["Act on two different bodies", "Act on same body", "Cancel each other", "Act along different lines"],
+        correctOptionIndex: 0,
+        explanation: "Action and reaction forces act simultaneously on different interacting bodies."
+      },
+      {
+        id: 14,
+        question: "A block slides down an inclined plane of 45° with acceleration g / (2√2). Coefficient of kinetic friction μ_k is:",
+        options: ["0.5", "0.25", "0.75", "0.1"],
+        correctOptionIndex: 0,
+        explanation: "a = g(sin θ - μ_k cos θ) ⇒ g / (2√2) = g(1/√2 - μ_k / √2) ⇒ 1/2 = 1 - μ_k ⇒ μ_k = 0.5."
+      },
+      {
+        id: 15,
+        question: "Centripetal force on a car of mass m traveling on a circular flat track of radius r at speed v is provided by:",
+        options: ["Frictional force between tires and road", "Normal reaction", "Gravitational force", "Engine thrust"],
+        correctOptionIndex: 0,
+        explanation: "Static friction between car tires and road provides necessary centripetal force f_s = m v² / r."
       }
     ]
   },
@@ -123,45 +263,115 @@ export const CHAPTER_MOCK_TESTS: ChapterMockTest[] = [
     subject: "chemistry",
     classLevel: "11",
     chapter: "Chemical Bonding & VSEPR",
-    questionsCount: 5,
-    durationMinutes: 15,
+    questionsCount: 15,
+    durationMinutes: 45,
     difficulty: "High Yield",
     examTrack: "BOTH",
     questions: [
       {
         id: 1,
-        question: "The shape and hybridization of PCl₅ in gas phase according to VSEPR theory are:",
+        question: "Shape and hybridization of PCl₅ in gas phase according to VSEPR theory are:",
         options: ["Trigonal bipyramidal, sp³d", "Square pyramidal, sp³d", "Octahedral, sp³d²", "Tetrahedral, sp³"],
         correctOptionIndex: 0,
-        explanation: "PCl₅ has 5 bonding pairs and 0 lone pairs on Phosphorus. Steric number = 5 (sp³d hybridization), giving a Trigonal Bipyramidal shape."
+        explanation: "5 bonding pairs, 0 lone pairs. Steric number = 5 (sp³d), Trigonal Bipyramidal shape."
       },
       {
         id: 2,
-        question: "Which of the following molecules has a non-zero dipole moment?",
+        question: "Which of the following molecules has non-zero dipole moment?",
         options: ["NH₃", "BF₃", "CCl₄", "CO₂"],
         correctOptionIndex: 0,
-        explanation: "BF₃ (trigonal planar), CCCl₄ (tetrahedral), and CO₂ (linear) are symmetrical and their bond dipoles cancel to yield zero net dipole moment. NH₃ is pyramidal with a lone pair, giving a net dipole moment of 1.47 D."
+        explanation: "NH₃ is pyramidal with net dipole moment 1.47 D, whereas BF₃, CCl₄, and CO₂ are symmetric with zero dipole moment."
       },
       {
         id: 3,
-        question: "According to Molecular Orbital Theory (MOT), the bond order of O₂⁺ ion is:",
+        question: "Bond order of O₂⁺ ion according to Molecular Orbital Theory is:",
         options: ["2.5", "2.0", "1.5", "3.0"],
         correctOptionIndex: 0,
-        explanation: "O₂ has 16 electrons (bond order = 2.0). O₂⁺ has 15 electrons, removing 1 electron from antibonding π* orbital. Bond order = ½ (N_b - N_a) = ½ (10 - 5) = 2.5."
+        explanation: "O₂⁺ has 15 electrons. Bond order = ½ (10 - 5) = 2.5."
       },
       {
         id: 4,
-        question: "The compound exhibiting intramolecular hydrogen bonding is:",
+        question: "Compound exhibiting intramolecular hydrogen bonding is:",
         options: ["o-Nitrophenol", "p-Nitrophenol", "Water", "Ethanol"],
         correctOptionIndex: 0,
-        explanation: "o-Nitrophenol forms a 6-membered chelate ring via intramolecular hydrogen bonding between the -OH group and adjacent -NO₂ group."
+        explanation: "o-Nitrophenol forms a 6-membered chelate ring via intramolecular hydrogen bonding."
       },
       {
         id: 5,
         question: "Hybridization of Iodine in IF₇ is:",
         options: ["sp³d³", "sp³d²", "sp³d", "sp³"],
         correctOptionIndex: 0,
-        explanation: "IF₇ has 7 bonding pairs and 0 lone pairs. Steric number = 7, corresponding to sp³d³ hybridization (Pentagonal Bipyramidal geometry)."
+        explanation: "7 bonding pairs, 0 lone pairs. Steric number = 7 (sp³d³), Pentagonal Bipyramidal."
+      },
+      {
+        id: 6,
+        question: "Bond angle in H₂O molecule is approximately:",
+        options: ["104.5°", "109.5°", "120°", "180°"],
+        correctOptionIndex: 0,
+        explanation: "H₂O has 2 bonding pairs and 2 lone pairs. Lone pair-lone pair repulsion reduces ideal tetrahedral angle 109.5° to 104.5°."
+      },
+      {
+        id: 7,
+        question: "Which species is paramagnetic?",
+        options: ["O₂", "N₂", "CO", "CN⁻"],
+        correctOptionIndex: 0,
+        explanation: "O₂ has 2 unpaired electrons in degenerate antibonding π*2p orbitals, making it paramagnetic."
+      },
+      {
+        id: 8,
+        question: "Lattice energy of ionic crystals increases with:",
+        options: ["Increased ionic charge and smaller ionic radii", "Decreased ionic charge", "Larger ionic radii", "Low electronegativity"],
+        correctOptionIndex: 0,
+        explanation: "Lattice energy U ∝ (q₁ q₂) / (r₊ + r₋). Higher charge and smaller ions increase lattice energy."
+      },
+      {
+        id: 9,
+        question: "The formal charge on central oxygen atom in Ozone (O₃) is:",
+        options: ["+1", "0", "-1", "+2"],
+        correctOptionIndex: 0,
+        explanation: "Formal Charge = V - L - ½ B = 6 - 2 - ½(6) = 6 - 2 - 3 = +1."
+      },
+      {
+        id: 10,
+        question: "Hybridization of central carbon in carbon dioxide (CO₂) is:",
+        options: ["sp", "sp²", "sp³", "sp³d"],
+        correctOptionIndex: 0,
+        explanation: "CO₂ has 2 σ bonds and 0 lone pairs on central C. Hybridization = sp (Linear geometry)."
+      },
+      {
+        id: 11,
+        question: "Resonance structures of a molecule have same:",
+        options: ["Position of atomic nuclei and total electrons", "Energy", "Bond length", "Hybridization"],
+        correctOptionIndex: 0,
+        explanation: "Resonating structures differ only in electron distribution; atomic nuclear positions remain fixed."
+      },
+      {
+        id: 12,
+        question: "Maximum number of hydrogen bonds a single H₂O molecule can form is:",
+        options: ["4", "2", "3", "6"],
+        correctOptionIndex: 0,
+        explanation: "Each H₂O forms 4 hydrogen bonds in ice structure (2 via lone pairs of Oxygen + 2 via Hydrogen atoms)."
+      },
+      {
+        id: 13,
+        question: "Shape of SF₄ molecule according to VSEPR theory is:",
+        options: ["See-saw", "Tetrahedral", "Square planar", "Trigonal planar"],
+        correctOptionIndex: 0,
+        explanation: "SF₄ has 4 bonding pairs and 1 lone pair on Sulfur (Steric number 5, sp³d), resulting in a See-saw shape."
+      },
+      {
+        id: 14,
+        question: "Species having zero dipole moment is:",
+        options: ["BF₃", "NF₃", "SO₂", "H₂S"],
+        correctOptionIndex: 0,
+        explanation: "BF₃ is trigonal planar (sp²), symmetrical with zero dipole moment."
+      },
+      {
+        id: 15,
+        question: "Bond length order among single, double, and triple carbon-carbon bonds is:",
+        options: ["C-C > C=C > C≡C", "C≡C > C=C > C-C", "C=C > C-C > C≡C", "C-C > C≡C > C=C"],
+        correctOptionIndex: 0,
+        explanation: "Higher bond multiplicity increases electron density pulling nuclei closer: Single (1.54 Å) > Double (1.34 Å) > Triple (1.20 Å)."
       }
     ]
   },
@@ -171,8 +381,8 @@ export const CHAPTER_MOCK_TESTS: ChapterMockTest[] = [
     subject: "mathematics",
     classLevel: "11",
     chapter: "Quadratic Equations & Sequences",
-    questionsCount: 5,
-    durationMinutes: 15,
+    questionsCount: 15,
+    durationMinutes: 45,
     difficulty: "Moderate",
     examTrack: "JEE",
     questions: [
@@ -181,35 +391,105 @@ export const CHAPTER_MOCK_TESTS: ChapterMockTest[] = [
         question: "If roots of equation x² - px + q = 0 differ by 1, then p² is equal to:",
         options: ["4q + 1", "4q - 1", "2q + 1", "q² + 1"],
         correctOptionIndex: 0,
-        explanation: "|α - β| = 1 ⇒ (α - β)² = 1. We know (α - β)² = (α + β)² - 4αβ = p² - 4q = 1 ⇒ p² = 4q + 1."
+        explanation: "(α - β)² = 1 ⇒ (α + β)² - 4αβ = 1 ⇒ p² - 4q = 1 ⇒ p² = 4q + 1."
       },
       {
         id: 2,
-        question: "The sum to infinity of the geometric progression 1 + 1/3 + 1/9 + 1/27 + ... is:",
+        question: "Sum to infinity of geometric progression 1 + 1/3 + 1/9 + 1/27 + ... is:",
         options: ["3 / 2", "2 / 3", "3", "2"],
         correctOptionIndex: 0,
-        explanation: "Sum S_∞ = a / (1 - r). Here a = 1 and r = 1/3. S_∞ = 1 / (1 - 1/3) = 1 / (2/3) = 3/2."
+        explanation: "S_∞ = a / (1 - r) = 1 / (1 - 1/3) = 3/2."
       },
       {
         id: 3,
-        question: "If A and G are the Arithmetic Mean and Geometric Mean of two positive numbers, then the numbers are:",
+        question: "If A and G are Arithmetic and Geometric Means of two positive numbers, the numbers are:",
         options: ["A ± √(A² - G²)", "A ± √(A² + G²)", "G ± √(A² - G²)", "A ± G"],
         correctOptionIndex: 0,
-        explanation: "Let numbers be x, y. x+y = 2A, xy = G². Quadratic equation whose roots are x, y: t² - 2At + G² = 0. Roots t = A ± √(A² - G²)."
+        explanation: "t² - 2At + G² = 0 ⇒ t = A ± √(A² - G²)."
       },
       {
         id: 4,
         question: "Number of real solutions of x² - 3|x| + 2 = 0 is:",
         options: ["4", "2", "3", "0"],
         correctOptionIndex: 0,
-        explanation: "(|x| - 1)(|x| - 2) = 0 ⇒ |x| = 1 or |x| = 2. x = ±1, ±2 (4 solutions)."
+        explanation: "(|x| - 1)(|x| - 2) = 0 ⇒ |x| = 1 or 2 ⇒ x = ±1, ±2 (4 solutions)."
       },
       {
         id: 5,
         question: "The 10th term of AP 2, 7, 12, ... is:",
         options: ["47", "52", "42", "57"],
         correctOptionIndex: 0,
-        explanation: "a = 2, d = 5. T₁₀ = a + 9d = 2 + 9(5) = 2 + 45 = 47."
+        explanation: "T₁₀ = 2 + 9(5) = 47."
+      },
+      {
+        id: 6,
+        question: "If roots of quadratic equation a x² + b x + c = 0 are equal, discriminant D is:",
+        options: ["0", "> 0", "< 0", "1"],
+        correctOptionIndex: 0,
+        explanation: "D = b² - 4ac = 0 for real and equal roots."
+      },
+      {
+        id: 7,
+        question: "Sum of first n natural numbers is given by formula:",
+        options: ["n(n + 1) / 2", "n(n - 1) / 2", "n²", "n(n + 1)(2n + 1) / 6"],
+        correctOptionIndex: 0,
+        explanation: "Σ n = n(n + 1) / 2."
+      },
+      {
+        id: 8,
+        question: "Common ratio of GP 3, 6, 12, 24, ... is:",
+        options: ["2", "3", "1/2", "6"],
+        correctOptionIndex: 0,
+        explanation: "r = 6 / 3 = 2."
+      },
+      {
+        id: 9,
+        question: "If α and β are roots of x² - 5x + 6 = 0, value of α² + β² is:",
+        options: ["13", "25", "12", "19"],
+        correctOptionIndex: 0,
+        explanation: "α + β = 5, αβ = 6. α² + β² = (α + β)² - 2αβ = 25 - 12 = 13."
+      },
+      {
+        id: 10,
+        question: "Minimum value of quadratic expression x² - 4x + 7 is:",
+        options: ["3", "7", "4", "0"],
+        correctOptionIndex: 0,
+        explanation: "x² - 4x + 7 = (x - 2)² + 3. Minimum value occurs at x = 2, which is 3."
+      },
+      {
+        id: 11,
+        question: "If 3rd and 7th terms of an AP are 12 and 24, the common difference d is:",
+        options: ["3", "4", "2", "6"],
+        correctOptionIndex: 0,
+        explanation: "T₇ - T₃ = 4d = 24 - 12 = 12 ⇒ d = 3."
+      },
+      {
+        id: 12,
+        question: "Harmonic Mean (HM) of two numbers 4 and 16 is:",
+        options: ["6.4", "10", "8", "5"],
+        correctOptionIndex: 0,
+        explanation: "HM = 2 ab / (a + b) = 2(4)(16) / (4 + 16) = 128 / 20 = 6.4."
+      },
+      {
+        id: 13,
+        question: "If α, β are roots of x² + x + 1 = 0, value of α³ is:",
+        options: ["1", "-1", "i", "0"],
+        correctOptionIndex: 0,
+        explanation: "Roots are complex cube roots of unity ω and ω². ω³ = 1."
+      },
+      {
+        id: 14,
+        question: "Sum of n terms of AP 1, 3, 5, 7, ... is:",
+        options: ["n²", "n(n + 1)", "2n²", "n² / 2"],
+        correctOptionIndex: 0,
+        explanation: "Sum of first n odd natural numbers = n²."
+      },
+      {
+        id: 15,
+        question: "Condition for quadratic equation ax² + bx + c = 0 to have purely imaginary roots is:",
+        options: ["b = 0 and ac > 0", "b = 0 and ac < 0", "a = 0", "c = 0"],
+        correctOptionIndex: 0,
+        explanation: "If b = 0, x² = -c/a. For imaginary roots, -c/a < 0 ⇒ ac > 0."
       }
     ]
   },
@@ -219,767 +499,115 @@ export const CHAPTER_MOCK_TESTS: ChapterMockTest[] = [
     subject: "biology",
     classLevel: "11",
     chapter: "Cell Structure & Division",
-    questionsCount: 5,
-    durationMinutes: 15,
+    questionsCount: 15,
+    durationMinutes: 45,
     difficulty: "High Yield",
     examTrack: "NEET",
     questions: [
       {
         id: 1,
-        question: "Which of the following cell organelles is known as the 'powerhouse of the cell'?",
+        question: "Which cell organelle is known as the 'powerhouse of the cell'?",
         options: ["Mitochondria", "Chloroplast", "Golgi Body", "Lysosome"],
         correctOptionIndex: 0,
-        explanation: "Mitochondria produce cellular energy in the form of ATP via aerobic respiration and oxidative phosphorylation."
+        explanation: "Mitochondria produce ATP through oxidative phosphorylation."
       },
       {
         id: 2,
         question: "Crossing over occurs during which stage of Prophase-I in Meiosis?",
         options: ["Pachytene", "Leptotene", "Zygotene", "Diplotene"],
         correctOptionIndex: 0,
-        explanation: "Crossing over between non-sister chromatids of homologous chromosomes occurs during the Pachytene stage, mediated by enzyme recombinase."
+        explanation: "Pachytene stage is characterized by crossing over mediated by recombinase."
       },
       {
         id: 3,
-        question: "The 9+2 arrangement of microtubules is characteristic of:",
+        question: "9+2 arrangement of microtubules is characteristic of:",
         options: ["Cilia and Flagella", "Centriole", "Basal Body", "Spindle Fibers"],
         correctOptionIndex: 0,
-        explanation: "Eukaryotic cilia and flagella possess an axoneme showing 9 peripheral doublets and 2 central singlets (9+2 pattern)."
+        explanation: "Cilia and flagella contain 9 peripheral doublets and 2 central singlets."
       },
       {
         id: 4,
-        question: "Histone proteins present in eukaryotic chromatin are rich in basic amino acids:",
-        options: ["Lysine and Arginine", "Valine and Leucine", "Alanine and Glycine", "Glutamic acid and Aspartic acid"],
+        question: "Histones in eukaryotic chromatin are rich in basic amino acids:",
+        options: ["Lysine and Arginine", "Valine and Leucine", "Alanine and Glycine", "Glutamic acid"],
         correctOptionIndex: 0,
-        explanation: "Histones carry positive charges due to abundance of basic amino acid residues Lysine and Arginine, allowing tight binding to negatively charged DNA."
+        explanation: "Histones carry positive charges due to Lysine and Arginine."
       },
       {
         id: 5,
         question: "Fluid Mosaic Model of cell membrane was proposed by Singer and Nicolson in:",
         options: ["1972", "1950", "1985", "1960"],
         correctOptionIndex: 0,
-        explanation: "Singer and Nicolson proposed the widely accepted Fluid Mosaic Model of plasma membrane structure in 1972."
-      }
-    ]
-  },
-  {
-    id: "c11-phy-thermo",
-    title: "Class 11 Physics: Thermodynamics & KTG",
-    subject: "physics",
-    classLevel: "11",
-    chapter: "Thermodynamics & KTG",
-    questionsCount: 5,
-    durationMinutes: 15,
-    difficulty: "Advanced",
-    examTrack: "BOTH",
-    questions: [
-      {
-        id: 1,
-        question: "Efficiency of a Carnot engine working between temperatures 127°C and 27°C is:",
-        options: ["25%", "33%", "50%", "75%"],
-        correctOptionIndex: 0,
-        explanation: "T₁ = 127 + 273 = 400 K, T₂ = 27 + 273 = 300 K. η = 1 - T₂/T₁ = 1 - 300/400 = 1/4 = 25%."
+        explanation: "Singer and Nicolson proposed the model in 1972."
       },
       {
-        id: 2,
-        question: "For an ideal diatomic gas, the molar specific heat capacity at constant volume C_v is:",
-        options: ["(5/2) R", "(3/2) R", "(7/2) R", "3 R"],
+        id: 6,
+        question: "Organelle known as 'suicide bags' of cell due to hydrolytic enzymes is:",
+        options: ["Lysosome", "Ribosome", "Peroxisome", "Centrosome"],
         correctOptionIndex: 0,
-        explanation: "Diatomic gas has 5 degrees of freedom at room temperature. C_v = (f/2) R = (5/2) R."
+        explanation: "Lysosomes contain acid hydrolases capable of digesting cellular components."
       },
       {
-        id: 3,
-        question: "In an adiabatic expansion of an ideal gas, the relationship between Pressure P and Volume V is given by (γ = C_p/C_v):",
-        options: ["P V^γ = constant", "P V = constant", "P/V = constant", "T V^γ = constant"],
+        id: 7,
+        question: "Protein synthesis in cell occurs on:",
+        options: ["Ribosomes", "Golgi apparatus", "Lysosomes", "Vacuoles"],
         correctOptionIndex: 0,
-        explanation: "The equation of state for a reversible adiabatic process is P V^γ = constant."
+        explanation: "Ribosomes are protein factories of the cell."
       },
       {
-        id: 4,
-        question: "The root mean square (rms) speed of gas molecules of mass m at temperature T is proportional to:",
-        options: ["√T", "T", "T²", "1/√T"],
+        id: 8,
+        question: "Synaptonemal complex formed during meiosis dissolves in stage:",
+        options: ["Diplotene", "Pachytene", "Zygotene", "Diakinesis"],
         correctOptionIndex: 0,
-        explanation: "v_rms = √(3RT/M), which is directly proportional to √T."
+        explanation: "Dissolution of synaptonemal complex marks beginning of Diplotene."
       },
       {
-        id: 5,
-        question: "Work done by an ideal gas in an isothermal expansion from volume V to 2V at temperature T is:",
-        options: ["n R T ln(2)", "n R T", "zero", "2 n R T"],
+        id: 9,
+        question: "S-phase (Synthesis phase) of cell cycle is characterized by:",
+        options: ["DNA replication and centriole duplication", "Nuclear division", "Cytokinesis", "Cell growth only"],
         correctOptionIndex: 0,
-        explanation: "W = n R T ln(V₂/V₁) = n R T ln(2V/V) = n R T ln(2)."
-      }
-    ]
-  },
-  {
-    id: "c11-chem-goc",
-    title: "Class 11 Chemistry: Organic Chemistry & Reaction Effects",
-    subject: "chemistry",
-    classLevel: "11",
-    chapter: "General Organic Chemistry",
-    questionsCount: 5,
-    durationMinutes: 15,
-    difficulty: "High Yield",
-    examTrack: "BOTH",
-    questions: [
-      {
-        id: 1,
-        question: "Which of the following carbocations is the most stable?",
-        options: ["(CH₃)₃C⁺", "(CH₃)₂CH⁺", "CH₃CH₂⁺", "CH₃⁺"],
-        correctOptionIndex: 0,
-        explanation: "Tertiary carbocation (CH₃)₃C⁺ has 9 hyperconjugative α-hydrogens and strong +I inductive effect from 3 methyl groups, making it the most stable."
+        explanation: "During S-phase, DNA content doubles from 2C to 4C."
       },
       {
-        id: 2,
-        question: "The IUPAC name of CH₃-CH(OH)-CH₂-COOH is:",
-        options: ["3-Hydroxybutanoic acid", "2-Hydroxybutanoic acid", "3-Hydroxybutan-1-ol", "Butan-3-ol-1-oic acid"],
+        id: 10,
+        question: "Middle lamella holding plant cells together is composed primarily of:",
+        options: ["Calcium pectate", "Cellulose", "Lignin", "Suberin"],
         correctOptionIndex: 0,
-        explanation: "Principal functional group is -COOH (C1). C3 bears the -OH hydroxyl substituent. IUPAC name = 3-Hydroxybutanoic acid."
+        explanation: "Middle lamella is made of Calcium and Magnesium pectates."
       },
       {
-        id: 3,
-        question: "Inductive effect involves complete transfer of:",
-        options: ["Shift of σ-electrons along carbon chain", "Transfer of π-electrons", "Unshared lone pair electrons", "Protons"],
+        id: 11,
+        question: "Non-membrane bound cell organelle found in both prokaryotes and eukaryotes is:",
+        options: ["Ribosome", "Mitochondria", "ER", "Nucleolus"],
         correctOptionIndex: 0,
-        explanation: "Inductive effect is a permanent displacement of σ-bonded electrons along a carbon chain due to electronegativity difference."
+        explanation: "Ribosomes are non-membrane bound organelles present in all cells."
       },
       {
-        id: 4,
-        question: "Which of the following exhibits geometrical isomerism?",
-        options: ["But-2-ene", "Propene", "Ethene", "2-Methylpropene"],
+        id: 12,
+        question: "Chiasmata formation is visible manifestation of crossing over in:",
+        options: ["Diplotene", "Pachytene", "Zygotene", "Leptotene"],
         correctOptionIndex: 0,
-        explanation: "But-2-ene (CH₃-CH=CH-CH₃) has non-identical groups on both double-bonded carbons, exhibiting Cis and Trans isomers."
+        explanation: "X-shaped chiasmata become clearly visible during Diplotene."
       },
       {
-        id: 5,
-        question: "Hyperconjugation involves delocalization of electrons of:",
-        options: ["C-H σ bond of an alkyl group directly attached to unsaturated system", "Lone pair electrons", "C-C σ bonds", "Benzene ring π bonds"],
+        id: 13,
+        question: "Centromere divides and sister chromatids separate during:",
+        options: ["Anaphase-II of Meiosis & Anaphase of Mitosis", "Metaphase-I", "Prophase-I", "Telophase"],
         correctOptionIndex: 0,
-        explanation: "Hyperconjugation (Baker-Nathan effect) involves σ(C-H) → π* or empty p-orbital electron delocalization."
-      }
-    ]
-  },
-  {
-    id: "c11-math-trig",
-    title: "Class 11 Mathematics: Trigonometric Functions & Identities",
-    subject: "mathematics",
-    classLevel: "11",
-    chapter: "Trigonometry & Formulas",
-    questionsCount: 5,
-    durationMinutes: 15,
-    difficulty: "Moderate",
-    examTrack: "JEE",
-    questions: [
-      {
-        id: 1,
-        question: "Value of sin(75°) is equal to:",
-        options: ["(√6 + √2) / 4", "(√6 - √2) / 4", "(√3 + 1) / 2", "(√3 - 1) / 2"],
-        correctOptionIndex: 0,
-        explanation: "sin(75°) = sin(45° + 30°) = sin 45° cos 30° + cos 45° sin 30° = (1/√2)(√3/2) + (1/√2)(1/2) = (√3 + 1) / (2√2) = (√6 + √2) / 4."
+        explanation: "Splitting of centromere occurs in Mitotic Anaphase and Meiotic Anaphase-II."
       },
       {
-        id: 2,
-        question: "Maximum value of 3 sin x + 4 cos x is:",
-        options: ["5", "7", "1", "25"],
+        id: 14,
+        question: "Semiconservative nature of DNA replication was experimentally proven by:",
+        options: ["Meselson and Stahl", "Hershey and Chase", "Watson and Crick", "Avery, MacLeod, McCarty"],
         correctOptionIndex: 0,
-        explanation: "Max value of a sin x + b cos x is √(a² + b²) = √(3² + 4²) = √(9 + 16) = 5."
+        explanation: "Meselson and Stahl used ¹⁵N heavy isotope of Nitrogen in E. coli in 1958."
       },
       {
-        id: 3,
-        question: "General solution of sin x = 1/2 is:",
-        options: ["nπ + (-1)ⁿ (π/6)", "nπ + (π/6)", "2nπ ± (π/6)", "nπ"],
+        id: 15,
+        question: "G₀ phase of cell cycle represents:",
+        options: ["Quiescent / Inactive stage of cell division", "Active division phase", "DNA synthesis stage", "Death stage"],
         correctOptionIndex: 0,
-        explanation: "sin x = sin(π/6) ⇒ x = nπ + (-1)ⁿ (π/6), where n ∈ ℤ."
-      },
-      {
-        id: 4,
-        question: "Value of cos 20° cos 40° cos 80° is:",
-        options: ["1 / 8", "1 / 4", "1 / 2", "1 / 16"],
-        correctOptionIndex: 0,
-        explanation: "Using product identity cos A cos 2A cos 4A = sin(2³ A) / (2³ sin A). For A = 20°: sin(80°) / (8 sin 20°) = sin(160°) / (8 sin 20°) = sin 20° / (8 sin 20°) = 1/8."
-      },
-      {
-        id: 5,
-        question: "If tan A = 1/2 and tan B = 1/3, then value of A + B is:",
-        options: ["45° (π/4)", "30°", "60°", "90°"],
-        correctOptionIndex: 0,
-        explanation: "tan(A + B) = (tan A + tan B) / (1 - tan A tan B) = (1/2 + 1/3) / (1 - 1/6) = (5/6) / (5/6) = 1 ⇒ A + B = 45°."
-      }
-    ]
-  },
-  {
-    id: "c11-bio-plant",
-    title: "Class 11 Biology: Plant Physiology & Photosynthesis",
-    subject: "biology",
-    classLevel: "11",
-    chapter: "Plant Physiology & Photosynthesis",
-    questionsCount: 5,
-    durationMinutes: 15,
-    difficulty: "High Yield",
-    examTrack: "NEET",
-    questions: [
-      {
-        id: 1,
-        question: "Primary CO₂ acceptor in C₄ plants is:",
-        options: ["Phosphoenolpyruvate (PEP)", "RuBP", "OAA", "PGA"],
-        correctOptionIndex: 0,
-        explanation: "In C₄ plants, CO₂ is accepted in mesophyll cells by Phosphoenolpyruvate (PEP), catalyzed by PEP carboxylase."
-      },
-      {
-        id: 2,
-        question: "Kranz anatomy is a characteristic anatomical feature of leaves of:",
-        options: ["C₄ plants (e.g. Maize, Sugarcane)", "C₃ plants (e.g. Wheat)", "CAM plants", "Hydrophytes"],
-        correctOptionIndex: 0,
-        explanation: "Kranz anatomy (bundle sheath cells arranged in wreath-like manner around vascular bundles) is unique to C₄ plants."
-      },
-      {
-        id: 3,
-        question: "The primary enzyme responsible for carbon fixation in C₃ cycle (Calvin Cycle) is:",
-        options: ["RuBisCO", "PEP carboxylase", "Carbonic anhydrase", "ATP synthase"],
-        correctOptionIndex: 0,
-        explanation: "RuBisCO (Ribulose-1,5-bisphosphate carboxylase-oxygenase) fixes CO₂ onto RuBP during carboxylation phase of Calvin cycle."
-      },
-      {
-        id: 4,
-        question: "Oxygen released during photosynthesis originates from splitting of:",
-        options: ["Water (H₂O)", "Carbon dioxide (CO₂)", "Glucose", "PGA"],
-        correctOptionIndex: 0,
-        explanation: "Photolysis of water at Photosystem II (PS II) releases O₂, H⁺ ions, and electrons."
-      },
-      {
-        id: 5,
-        question: "Plant hormone responsible for ripening of fruits is:",
-        options: ["Ethylene", "Auxin", "Gibberellin", "Cytokinin"],
-        correctOptionIndex: 0,
-        explanation: "Ethylene (gaseous hormone) promotes fruit ripening and senescence."
-      }
-    ]
-  },
-  {
-    id: "c11-phy-shm",
-    title: "Class 11 Physics: Simple Harmonic Motion & Waves",
-    subject: "physics",
-    classLevel: "11",
-    chapter: "Simple Harmonic Motion & Waves",
-    questionsCount: 5,
-    durationMinutes: 15,
-    difficulty: "Moderate",
-    examTrack: "BOTH",
-    questions: [
-      {
-        id: 1,
-        question: "Time period of a simple pendulum of length L is T. If length is quadrupled, new time period becomes:",
-        options: ["2T", "4T", "T/2", "T"],
-        correctOptionIndex: 0,
-        explanation: "T = 2π √(L/g). T' = 2π √(4L/g) = 2 (2π √(L/g)) = 2T."
-      },
-      {
-        id: 2,
-        question: "A particle executes SHM with amplitude A. At what displacement from mean position is kinetic energy equal to potential energy?",
-        options: ["A / √2", "A / 2", "A / √3", "A"],
-        correctOptionIndex: 0,
-        explanation: "KE = ½ m ω² (A² - x²), PE = ½ m ω² x². Setting KE = PE: A² - x² = x² ⇒ 2x² = A² ⇒ x = A / √2."
-      },
-      {
-        id: 3,
-        question: "Equation of a wave is y = 0.05 sin(200 t - 4 x). The velocity of the wave is:",
-        options: ["50 m/s", "800 m/s", "200 m/s", "25 m/s"],
-        correctOptionIndex: 0,
-        explanation: "Wave equation format y = A sin(ω t - k x). Here ω = 200 rad/s and k = 4 rad/m. Wave velocity v = ω / k = 200 / 4 = 50 m/s."
-      },
-      {
-        id: 4,
-        question: "Fundamental frequency of an open organ pipe of length L is f. If one end is closed, fundamental frequency becomes:",
-        options: ["f / 2", "2f", "f", "3f"],
-        correctOptionIndex: 0,
-        explanation: "Open pipe fundamental: f_open = v / (2L). Closed pipe fundamental: f_closed = v / (4L) = ½ (v / (2L)) = f / 2."
-      },
-      {
-        id: 5,
-        question: "Beats are produced by two sound sources of frequencies 256 Hz and 260 Hz. Number of beats heard per second is:",
-        options: ["4", "2", "8", "1"],
-        correctOptionIndex: 0,
-        explanation: "Beat frequency f_beat = |f₁ - f₂| = |260 - 256| = 4 beats/s."
-      }
-    ]
-  },
-
-  // ==================== CLASS 12 TESTS (10 TESTS) ====================
-  {
-    id: "c12-phy-electrostatics",
-    title: "Class 12 Physics: Electrostatics & Potential",
-    subject: "physics",
-    classLevel: "12",
-    chapter: "Electrostatics & Capacitors",
-    questionsCount: 5,
-    durationMinutes: 15,
-    difficulty: "High Yield",
-    examTrack: "BOTH",
-    questions: [
-      {
-        id: 1,
-        question: "Electric field at a distance r from an infinitely long straight wire carrying uniform charge density λ is:",
-        options: ["λ / (2π ε₀ r)", "λ / (4π ε₀ r²)", "2λ / (ε₀ r)", "λ r / (2π ε₀)"],
-        correctOptionIndex: 0,
-        explanation: "Using Gauss's Law: E (2π r L) = (λ L) / ε₀ ⇒ E = λ / (2π ε₀ r)."
-      },
-      {
-        id: 2,
-        question: "Two point charges +q and -q are separated by distance 2a. The electric potential at mid-point between them is:",
-        options: ["Zero", "q / (2π ε₀ a)", "q / (4π ε₀ a²)", "2q / (4π ε₀ a)"],
-        correctOptionIndex: 0,
-        explanation: "Potential at midpoint: V = V₁ + V₂ = (1/4πε₀)(q/a) + (1/4πε₀)(-q/a) = 0."
-      },
-      {
-        id: 3,
-        question: "Work done in moving a charge of 5 C between two points having potential difference 12 V is:",
-        options: ["60 J", "2.4 J", "17 J", "300 J"],
-        correctOptionIndex: 0,
-        explanation: "W = q ΔV = 5 × 12 = 60 Joules."
-      },
-      {
-        id: 4,
-        question: "Energy stored in a capacitor of capacitance C charged to potential V is:",
-        options: ["½ C V²", "C V²", "½ C² V", "C / V²"],
-        correctOptionIndex: 0,
-        explanation: "Electrostatic potential energy stored in capacitor U = ½ C V² = ½ Q V = Q² / (2C)."
-      },
-      {
-        id: 5,
-        question: "SI unit of dielectric constant K is:",
-        options: ["Dimensionless (No units)", "C²/N-m²", "F/m", "N/C"],
-        correctOptionIndex: 0,
-        explanation: "Dielectric constant K = ε / ε₀ is the ratio of two identical quantities, hence dimensionless."
-      }
-    ]
-  },
-  {
-    id: "c12-phy-current",
-    title: "Class 12 Physics: Current Electricity & Circuits",
-    subject: "physics",
-    classLevel: "12",
-    chapter: "Current Electricity & Magnetism",
-    questionsCount: 5,
-    durationMinutes: 15,
-    difficulty: "High Yield",
-    examTrack: "BOTH",
-    questions: [
-      {
-        id: 1,
-        question: "Drift velocity v_d of electrons in a conductor is related to electric field E by:",
-        options: ["v_d ∝ E", "v_d ∝ E²", "v_d ∝ 1/E", "v_d is independent of E"],
-        correctOptionIndex: 0,
-        explanation: "Drift velocity formula v_d = (e E τ) / m, directly proportional to E."
-      },
-      {
-        id: 2,
-        question: "Wheatstone bridge is most sensitive when all four resistance arms are:",
-        options: ["Equal in magnitude", "Very high", "Very low", "Unequal"],
-        correctOptionIndex: 0,
-        explanation: "Maximum sensitivity of a Wheatstone bridge is achieved when all four resistors P, Q, R, S are nearly equal."
-      },
-      {
-        id: 3,
-        question: "Three resistors of 2 Ω, 3 Ω, and 6 Ω connected in parallel give equivalent resistance:",
-        options: ["1 Ω", "11 Ω", "2 Ω", "0.5 Ω"],
-        correctOptionIndex: 0,
-        explanation: "1/R_eq = 1/2 + 1/3 + 1/6 = (3 + 2 + 1)/6 = 6/6 = 1 ⇒ R_eq = 1 Ω."
-      },
-      {
-        id: 4,
-        question: "Internal resistance of an ideal voltmeter is:",
-        options: ["Infinite", "Zero", "100 Ω", "10,000 Ω"],
-        correctOptionIndex: 0,
-        explanation: "An ideal voltmeter has infinite resistance so it draws no current from the circuit."
-      },
-      {
-        id: 5,
-        question: "Kirchhoff's First Law (Junction Rule) is based on conservation of:",
-        options: ["Charge", "Energy", "Momentum", "Mass"],
-        correctOptionIndex: 0,
-        explanation: "Junction rule (Σ I = 0) expresses conservation of electric charge."
-      }
-    ]
-  },
-  {
-    id: "c12-chem-kinetics",
-    title: "Class 12 Chemistry: Chemical Kinetics & Rates",
-    subject: "chemistry",
-    classLevel: "12",
-    chapter: "Chemical Kinetics & Rates",
-    questionsCount: 5,
-    durationMinutes: 15,
-    difficulty: "High Yield",
-    examTrack: "BOTH",
-    questions: [
-      {
-        id: 1,
-        question: "Half-life of a first order reaction is independent of:",
-        options: ["Initial concentration of reactant", "Temperature", "Rate constant", "Catalyst"],
-        correctOptionIndex: 0,
-        explanation: "For 1st order reaction, t_{1/2} = 0.693 / k, which is independent of initial concentration."
-      },
-      {
-        id: 2,
-        question: "Unit of rate constant for a second-order reaction is:",
-        options: ["mol⁻¹ L s⁻¹", "s⁻¹", "mol L⁻¹ s⁻¹", "mol⁻² L² s⁻¹"],
-        correctOptionIndex: 0,
-        explanation: "General unit for nth order k is (mol/L)^(1-n) s⁻¹. For n = 2: (mol L⁻¹)⁻¹ s⁻¹ = L mol⁻¹ s⁻¹."
-      },
-      {
-        id: 3,
-        question: "Arrhenius equation showing temperature dependence of rate constant is:",
-        options: ["k = A e^(-E_a / RT)", "k = A e^(E_a / RT)", "k = A / (RT)", "k = A ln(E_a)"],
-        correctOptionIndex: 0,
-        explanation: "Arrhenius formula k = A exp(-E_a / RT), where E_a is activation energy."
-      },
-      {
-        id: 4,
-        question: "A catalyst increases the rate of reaction by:",
-        options: ["Decreasing activation energy", "Increasing activation energy", "Increasing enthalpy ΔH", "Decreasing temperature"],
-        correctOptionIndex: 0,
-        explanation: "A catalyst provides an alternate reaction pathway with lower activation energy."
-      },
-      {
-        id: 5,
-        question: "If rate law is Rate = k [A]² [B], overall order of reaction is:",
-        options: ["3", "2", "1", "0"],
-        correctOptionIndex: 0,
-        explanation: "Overall order = sum of exponents = 2 + 1 = 3 (Third order)."
-      }
-    ]
-  },
-  {
-    id: "c12-chem-coordination",
-    title: "Class 12 Chemistry: Coordination Compounds & Isomerism",
-    subject: "chemistry",
-    classLevel: "12",
-    chapter: "Coordination Compounds",
-    questionsCount: 5,
-    durationMinutes: 15,
-    difficulty: "Moderate",
-    examTrack: "BOTH",
-    questions: [
-      {
-        id: 1,
-        question: "IUPAC name of complex [Co(NH₃)₆]Cl₃ is:",
-        options: ["Hexaamminecobalt(III) chloride", "Hexaamminecobalt(II) chloride", "Cobalt hexaammine chloride", "Hexaamminecobaltic chloride"],
-        correctOptionIndex: 0,
-        explanation: "Complex cation: Co is in +3 oxidation state [x + 0 = +3]. Cation named first: Hexaamminecobalt(III), followed by anion: chloride."
-      },
-      {
-        id: 2,
-        question: "Which of the following ligands is a bidentate ligand?",
-        options: ["Oxalate ion (C₂O₄²⁻)", "Ammonia (NH₃)", "Water (H₂O)", "Cyanide ion (CN⁻)"],
-        correctOptionIndex: 0,
-        explanation: "Oxalate ion C₂O₄²⁻ (ox) coordinates via two oxygen donor atoms, making it bidentate."
-      },
-      {
-        id: 3,
-        question: "Hybridization and geometry of [Ni(CN)₄]²⁻ complex are:",
-        options: ["dsp², Square planar", "sp³, Tetrahedral", "sp³d², Octahedral", "d²sp³, Octahedral"],
-        correctOptionIndex: 0,
-        explanation: "CN⁻ is a strong field ligand causing pairing of d-electrons in Ni²⁺ (3d⁸). Hybridization = dsp², geometry = Square Planar (diamagnetic)."
-      },
-      {
-        id: 4,
-        question: "Coordination number of Fe in [Fe(EDTA)]⁻ complex is:",
-        options: ["6", "4", "2", "8"],
-        correctOptionIndex: 0,
-        explanation: "EDTA⁴⁻ is a hexadentate ligand possessing 6 donor atoms (2 Nitrogen + 4 Oxygen), so coordination number of Fe is 6."
-      },
-      {
-        id: 5,
-        question: "Which type of isomerism is shown by [Co(NH₃)₅(SO₄)]Br and [Co(NH₃)₅Br]SO₄?",
-        options: ["Ionization isomerism", "Linkage isomerism", "Coordination isomerism", "Hydrate isomerism"],
-        correctOptionIndex: 0,
-        explanation: "Ionization isomers yield different ions in solution upon dissociation (Br⁻ vs SO₄²⁻)."
-      }
-    ]
-  },
-  {
-    id: "c12-math-calculus",
-    title: "Class 12 Mathematics: Differential Calculus & Derivatives",
-    subject: "mathematics",
-    classLevel: "12",
-    chapter: "Differential Calculus",
-    questionsCount: 5,
-    durationMinutes: 15,
-    difficulty: "Advanced",
-    examTrack: "JEE",
-    questions: [
-      {
-        id: 1,
-        question: "Derivative of e^(x²) with respect to x is:",
-        options: ["2x e^(x²)", "e^(x²)", "x e^(x²)", "2e^(x²)"],
-        correctOptionIndex: 0,
-        explanation: "Using Chain Rule: d/dx [e^(x²)] = e^(x²) × d/dx [x²] = 2x e^(x²)."
-      },
-      {
-        id: 2,
-        question: "If y = ln(sin x), then dy/dx is:",
-        options: ["cot x", "tan x", "cos x", "1 / sin x"],
-        correctOptionIndex: 0,
-        explanation: "dy/dx = (1 / sin x) × cos x = cot x."
-      },
-      {
-        id: 3,
-        question: "The slope of tangent to the curve y = x³ - x at x = 2 is:",
-        options: ["11", "6", "12", "8"],
-        correctOptionIndex: 0,
-        explanation: "dy/dx = 3x² - 1. At x = 2: Slope = 3(2²) - 1 = 3(4) - 1 = 11."
-      },
-      {
-        id: 4,
-        question: "Maximum value of function f(x) = x(1 - x) on interval [0, 1] occurs at x equal to:",
-        options: ["1 / 2", "1 / 4", "1", "0"],
-        correctOptionIndex: 0,
-        explanation: "f(x) = x - x². f'(x) = 1 - 2x = 0 ⇒ x = 1/2. f''(x) = -2 < 0 (Maximum at x = 1/2)."
-      },
-      {
-        id: 5,
-        question: "If f(x) = |x|, then derivative f'(0) is:",
-        options: ["Does not exist", "0", "1", "-1"],
-        correctOptionIndex: 0,
-        explanation: "Left-hand derivative at 0 is -1, Right-hand derivative at 0 is +1. Since LHD ≠ RHD, f'(0) does not exist."
-      }
-    ]
-  },
-  {
-    id: "c12-bio-genetics",
-    title: "Class 12 Biology: Genetics & Molecular Inheritance",
-    subject: "biology",
-    classLevel: "12",
-    chapter: "Genetics & Inheritance",
-    questionsCount: 5,
-    durationMinutes: 15,
-    difficulty: "High Yield",
-    examTrack: "NEET",
-    questions: [
-      {
-        id: 1,
-        question: "Mendelian dihybrid cross phenotypic ratio in F₂ generation is:",
-        options: ["9 : 3 : 3 : 1", "3 : 1", "1 : 2 : 1", "9 : 7"],
-        correctOptionIndex: 0,
-        explanation: "Mendel's dihybrid cross yields a phenotypic ratio of 9 (Dominant-Dominant) : 3 (Dominant-Recessive) : 3 (Recessive-Dominant) : 1 (Recessive-Recessive)."
-      },
-      {
-        id: 2,
-        question: "The enzyme that unwinds DNA double helix during replication is:",
-        options: ["DNA Helicase", "DNA Polymerase", "DNA Ligase", "RNA Primase"],
-        correctOptionIndex: 0,
-        explanation: "Helicase unwinds and separates parental DNA strands by breaking hydrogen bonds."
-      },
-      {
-        id: 3,
-        question: "Initiation codon that codes for Methionine during translation is:",
-        options: ["AUG", "UAA", "UAG", "UGA"],
-        correctOptionIndex: 0,
-        explanation: "AUG is universal initiation codon coding for Methionine in eukaryotes."
-      },
-      {
-        id: 4,
-        question: "Human ABO blood grouping is an example of:",
-        options: ["Multiple allelism and Co-dominance", "Incomplete dominance", "Polygenic inheritance", "Pleiotropy"],
-        correctOptionIndex: 0,
-        explanation: "ABO blood group is governed by gene I with 3 alleles (Iᴬ, Iᴮ, i) showing Multiple Allelism and Co-dominance."
-      },
-      {
-        id: 5,
-        question: "Haemophilia is a genetic disorder inherited as:",
-        options: ["Sex-linked recessive disorder", "Autosomal dominant disorder", "Autosomal recessive disorder", "Sex-linked dominant disorder"],
-        correctOptionIndex: 0,
-        explanation: "Haemophilia is an X-linked sex-linked recessive blood-clotting disorder."
-      }
-    ]
-  },
-  {
-    id: "c12-phy-optics",
-    title: "Class 12 Physics: Ray & Wave Optics",
-    subject: "physics",
-    classLevel: "12",
-    chapter: "Ray & Wave Optics",
-    questionsCount: 5,
-    durationMinutes: 15,
-    difficulty: "High Yield",
-    examTrack: "BOTH",
-    questions: [
-      {
-        id: 1,
-        question: "Focal length of a convex lens of power +4 D is:",
-        options: ["25 cm", "50 cm", "100 cm", "10 cm"],
-        correctOptionIndex: 0,
-        explanation: "Power P = 1 / f(in meters). f = 1 / +4 = 0.25 m = 25 cm."
-      },
-      {
-        id: 2,
-        question: "Critical angle for total internal reflection from glass (μ = 1.5) to air is approx:",
-        options: ["41.8°", "30°", "45°", "60°"],
-        correctOptionIndex: 0,
-        explanation: "sin i_c = 1 / μ = 1 / 1.5 = 2 / 3 ≈ 0.6667 ⇒ i_c = sin⁻¹(0.6667) ≈ 41.8°."
-      },
-      {
-        id: 3,
-        question: "Phenomenon proving transverse nature of light waves is:",
-        options: ["Polarization", "Interference", "Diffraction", "Refraction"],
-        correctOptionIndex: 0,
-        explanation: "Polarization occurs only in transverse waves, proving light is a transverse wave."
-      },
-      {
-        id: 4,
-        question: "A astronomical telescope has objective of focal length 100 cm and eyepiece of focal length 5 cm. Magnifying power in normal adjustment is:",
-        options: ["20", "500", "105", "95"],
-        correctOptionIndex: 0,
-        explanation: "Magnifying power m = f_o / f_e = 100 / 5 = 20."
-      },
-      {
-        id: 5,
-        question: "Diffraction of light is observed when obstacle size is:",
-        options: ["Comparable to wavelength of light", "Much larger than wavelength", "Infinitely large", "Zero"],
-        correctOptionIndex: 0,
-        explanation: "Noticeable diffraction occurs when aperture/obstacle size is comparable to wavelength λ."
-      }
-    ]
-  },
-  {
-    id: "c12-chem-organic-reactions",
-    title: "Class 12 Chemistry: Haloalkanes, Amines & Polymers",
-    subject: "chemistry",
-    classLevel: "12",
-    chapter: "Organic Chemistry 12th",
-    questionsCount: 5,
-    durationMinutes: 15,
-    difficulty: "Moderate",
-    examTrack: "BOTH",
-    questions: [
-      {
-        id: 1,
-        question: "Primary aromatic amines on reaction with nitrous acid (HNO₂ + HCl) at 0-5°C form:",
-        options: ["Diazonium salts", "Phenols", "Nitrobenzene", "Aniline"],
-        correctOptionIndex: 0,
-        explanation: "Diazotization reaction: Ar-NH₂ + HNO₂ + HCl (0-5°C) → Ar-N₂⁺ Cl⁻ + 2 H₂O."
-      },
-      {
-        id: 2,
-        question: "Hofmann bromamide degradation reaction converts primary amides into:",
-        options: ["Primary amines with one less carbon atom", "Secondary amines", "Nitriles", "Carboxylic acids"],
-        correctOptionIndex: 0,
-        explanation: "R-CONH₂ + Br₂ + 4 NaOH → R-NH₂ + Na₂CO₃ + 2 NaBr + 2 H₂O (carbon chain shortened by 1)."
-      },
-      {
-        id: 3,
-        question: "Reaction of alkyl halides with sodium metal in dry ether to form alkanes is known as:",
-        options: ["Wurtz reaction", "Fittig reaction", "Kolbe reaction", "Reimer-Tiemann reaction"],
-        correctOptionIndex: 0,
-        explanation: "2 R-X + 2 Na (dry ether) → R-R + 2 NaX is the Wurtz reaction."
-      },
-      {
-        id: 4,
-        question: "S_N2 reaction proceeds with complete:",
-        options: ["Inversion of configuration (Walden inversion)", "Retention of configuration", "Racemization", "No change"],
-        correctOptionIndex: 0,
-        explanation: "S_N2 is a single-step backside nucleophilic attack producing 100% inversion of stereochemical configuration."
-      },
-      {
-        id: 5,
-        question: "Which test is used to distinguish primary amines from secondary and tertiary amines?",
-        options: ["Carbylamine test", "Lucas test", "Tollens test", "Iodoform test"],
-        correctOptionIndex: 0,
-        explanation: "Carbylamine test (CHCl₃ + KOH) is given only by 1° aliphatic/aromatic amines forming foul-smelling isocyanides."
-      }
-    ]
-  },
-  {
-    id: "c12-math-integration",
-    title: "Class 12 Mathematics: Integrals & Differential Equations",
-    subject: "mathematics",
-    classLevel: "12",
-    chapter: "Integral Calculus",
-    questionsCount: 5,
-    durationMinutes: 15,
-    difficulty: "Advanced",
-    examTrack: "JEE",
-    questions: [
-      {
-        id: 1,
-        question: "∫ (1 / x) dx is equal to:",
-        options: ["ln|x| + C", "-1/x² + C", "x² / 2 + C", "e^x + C"],
-        correctOptionIndex: 0,
-        explanation: "Indefinite integral of 1/x is natural logarithm ln|x| + C."
-      },
-      {
-        id: 2,
-        question: "Value of ∫₀¹ x e^x dx is:",
-        options: ["1", "e", "e - 1", "2e"],
-        correctOptionIndex: 0,
-        explanation: "Integration by parts: ∫ x e^x dx = x e^x - ∫ e^x dx = x e^x - e^x. Evaluated [x e^x - e^x]₀¹ = (1 e¹ - e¹) - (0 - e⁰) = 0 - (-1) = 1."
-      },
-      {
-        id: 3,
-        question: "Order and degree of differential equation (d²y/dx²)³ + (dy/dx)² + y = 0 are:",
-        options: ["Order 2, Degree 3", "Order 3, Degree 2", "Order 2, Degree 2", "Order 1, Degree 3"],
-        correctOptionIndex: 0,
-        explanation: "Highest order derivative is d²y/dx² (Order = 2). Exponent of highest derivative is 3 (Degree = 3)."
-      },
-      {
-        id: 4,
-        question: "Integrating factor (I.F.) of linear differential equation dy/dx + P(x) y = Q(x) is:",
-        options: ["e^(∫ P dx)", "e^(∫ Q dx)", "∫ P dx", "ln(P)"],
-        correctOptionIndex: 0,
-        explanation: "Integrating factor for 1st order linear differential equation is I.F. = exp(∫ P(x) dx)."
-      },
-      {
-        id: 5,
-        question: "∫ sec² x dx is equal to:",
-        options: ["tan x + C", "sec x + C", "-cot x + C", "ln|sec x| + C"],
-        correctOptionIndex: 0,
-        explanation: "d/dx (tan x) = sec² x, hence ∫ sec² x dx = tan x + C."
-      }
-    ]
-  },
-  {
-    id: "c12-bio-biotech",
-    title: "Class 12 Biology: Biotechnology & Ecology",
-    subject: "biology",
-    classLevel: "12",
-    chapter: "Biotechnology & Ecology",
-    questionsCount: 5,
-    durationMinutes: 15,
-    difficulty: "High Yield",
-    examTrack: "NEET",
-    questions: [
-      {
-        id: 1,
-        question: "Restriction enzymes ('Molecular Scissors') cut DNA at specific palindromic sequences by cleaving:",
-        options: ["Phosphodiester bonds", "Hydrogen bonds", "Glycosidic bonds", "Peptide bonds"],
-        correctOptionIndex: 0,
-        explanation: "Restriction endonucleases cleave phosphodiester backbone of DNA double helix."
-      },
-      {
-        id: 2,
-        question: "Polymerase Chain Reaction (PCR) technique was developed by:",
-        options: ["Kary Mullis", "Paul Berg", "Stanley Cohen", "Alec Jeffreys"],
-        correctOptionIndex: 0,
-        explanation: "Kary Mullis invented PCR in 1983 for amplifying target DNA sequences, earning Nobel Prize."
-      },
-      {
-        id: 3,
-        question: "Thermostable DNA Polymerase used in PCR is Taq Polymerase, isolated from bacteria:",
-        options: ["Thermus aquaticus", "Escherichia coli", "Agrobacterium tumefaciens", "Bacillus thuringiensis"],
-        correctOptionIndex: 0,
-        explanation: "Taq polymerase is extracted from thermophilic bacterium Thermus aquaticus."
-      },
-      {
-        id: 4,
-        question: "First transgenic crop produced commercially was:",
-        options: ["Flavr Savr Tomato / Tobacco", "Bt Cotton", "Golden Rice", "Bt Brinjal"],
-        correctOptionIndex: 0,
-        explanation: "Transgenic tobacco / Flavr Savr tomato with delayed ripening were early commercial GM crops."
-      },
-      {
-        id: 5,
-        question: "Which ecological pyramid is ALWAYS upright in all ecosystems?",
-        options: ["Pyramid of Energy", "Pyramid of Biomass", "Pyramid of Numbers", "Pyramid of Height"],
-        correctOptionIndex: 0,
-        explanation: "Pyramid of Energy is always upright because energy is lost as heat at each trophic level (10% law)."
+        explanation: "Cells in G₀ phase remain metabolically active but no longer proliferate unless called upon."
       }
     ]
   }

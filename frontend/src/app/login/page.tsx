@@ -123,8 +123,7 @@ export default function LoginPage() {
         </div>
 
         <div className="z-10 flex items-center gap-6 text-sm font-medium text-zinc-600">
-          <span className="text-zinc-500">&copy; 2026 RankTorque</span>
-          <a href="/about" className="hover:text-zinc-300 transition-colors">About &amp; Support</a>
+          <span className="text-zinc-500">&copy; 2026 RankTorque Technologies Pvt. Ltd.</span>
         </div>
       </div>
 

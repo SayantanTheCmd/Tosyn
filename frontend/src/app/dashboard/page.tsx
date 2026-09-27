@@ -100,8 +100,7 @@ export default function DashboardPage() {
     { value: "practice", label: "Practice", icon: <HugeiconsIcon icon={BookOpen01Icon} size={18} /> },
     { value: "tests", label: "Mock Tests", icon: <HugeiconsIcon icon={File02Icon} size={18} /> },
     { value: "roughwork", label: "RoughWork", icon: <HugeiconsIcon icon={PencilEdit02Icon} size={18} /> },
-    { value: "analytics", label: "Analytics", icon: <HugeiconsIcon icon={AnalyticsUpIcon} size={18} /> },
-    { value: "profile", label: "Profile", icon: <HugeiconsIcon icon={UserCircleIcon} size={18} /> }
+    { value: "analytics", label: "Analytics", icon: <HugeiconsIcon icon={AnalyticsUpIcon} size={18} /> }
   ];
 
   // Subject configurations
@@ -234,19 +233,18 @@ export default function DashboardPage() {
               items={navItems as any}
               defaultValue="practice"
               size="md"
-              onChange={(val: string) => setActiveTab(val)}
+              onChange={(val: string) => {
+                if (val === "tests") {
+                  router.push("/dashboard/mock-test");
+                } else {
+                  setActiveTab(val);
+                }
+              }}
             />
           </div>
         </div>
 
         <div className="flex items-center gap-4 md:gap-6">
-          <button
-            onClick={() => router.push("/about")}
-            className="text-xs font-semibold text-zinc-400 hover:text-white transition-colors px-3 py-1.5 rounded-lg hover:bg-white/5"
-          >
-            About &amp; Contact
-          </button>
-
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
             <HugeiconsIcon icon={FireIcon} size={16} />
             <span>14 Day Streak</span>
@@ -695,30 +693,6 @@ export default function DashboardPage() {
         ) : (
           /* Standard Practice & Dashboard Overview View */
           <>
-            {/* Quick Insights Banner */}
-            <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-[#0a0a0a] border border-white/[0.05] rounded-2xl p-5 flex flex-col gap-1">
-                <span className="text-xs font-medium text-zinc-500 uppercase tracking-wider">Target Exam</span>
-                <div className="text-2xl font-bold text-white">{track} 2026</div>
-                <span className="text-xs text-blue-400 font-medium">142 Days Remaining</span>
-              </div>
-              <div className="bg-[#0a0a0a] border border-white/[0.05] rounded-2xl p-5 flex flex-col gap-1">
-                <span className="text-xs font-medium text-zinc-500 uppercase tracking-wider">Questions Solved</span>
-                <div className="text-2xl font-bold text-white">982 <span className="text-sm font-normal text-zinc-500">/ 2,650</span></div>
-                <span className="text-xs text-emerald-400 font-medium">+42 this week</span>
-              </div>
-              <div className="bg-[#0a0a0a] border border-white/[0.05] rounded-2xl p-5 flex flex-col gap-1">
-                <span className="text-xs font-medium text-zinc-500 uppercase tracking-wider">Overall Accuracy</span>
-                <div className="text-2xl font-bold text-white">88.4%</div>
-                <span className="text-xs text-zinc-400 font-medium">Based on 12 Mocks</span>
-              </div>
-              <div className="bg-[#0a0a0a] border border-white/[0.05] rounded-2xl p-5 flex flex-col gap-1">
-                <span className="text-xs font-medium text-zinc-500 uppercase tracking-wider">National Percentile</span>
-                <div className="text-2xl font-bold text-white">99.1%ile</div>
-                <span className="text-xs text-purple-400 font-medium">Predicted AIR &lt; 850</span>
-              </div>
-            </section>
-
             {/* 2-Column Responsive Workspace */}
             <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
 
@@ -897,65 +871,6 @@ export default function DashboardPage() {
                       <HugeiconsIcon icon={Add01Icon} size={16} />
                     </button>
                   </form>
-                </section>
-
-                {/* RoughWork Notepad Mini Panel */}
-                <section className="bg-[#0a0a0a] border border-white/[0.06] rounded-3xl p-6 shadow-xl flex flex-col gap-5">
-                  <div className="flex items-center justify-between border-b border-white/[0.06] pb-4">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center border border-blue-500/20">
-                        <HugeiconsIcon icon={PencilEdit02Icon} size={16} />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-white tracking-tight">RoughWork</h3>
-                        <p className="text-xs text-zinc-500">Scratchpad &amp; saved notes</p>
-                      </div>
-                    </div>
-
-                    <button
-                      onClick={() => setActiveTab("roughwork")}
-                      className="text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors"
-                    >
-                      Expand Studio &rarr;
-                    </button>
-                  </div>
-
-                  {/* Active Scratchpad */}
-                  <textarea
-                    value={roughText}
-                    onChange={e => setRoughText(e.target.value)}
-                    placeholder="Type temporary working, derivation steps..."
-                    rows={4}
-                    className="w-full bg-[#050505] border border-white/5 rounded-2xl p-4 text-xs font-mono text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-white/20 resize-none leading-relaxed shadow-inner"
-                  />
-
-                  {/* Saved Notes with SwipeRow */}
-                  <div className="flex flex-col gap-2.5">
-                    <span className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">
-                      Saved Notes (Swipe to delete)
-                    </span>
-
-                    {savedNotes.length === 0 ? (
-                      <p className="text-xs text-zinc-600 italic py-2">No saved scratch notes.</p>
-                    ) : (
-                      savedNotes.slice(0, 2).map(note => (
-                        <SwipeRow
-                          key={note.id}
-                          height={46}
-                          radius={12}
-                          rowColor="#111113"
-                          actionColor="#ef4444"
-                          actions={[{ id: "delete", label: "Delete" }]}
-                          onAction={() => handleDeleteNote(note.id)}
-                        >
-                          <div className="px-4 w-full flex items-center justify-between">
-                            <span className="text-xs font-medium text-zinc-200 truncate max-w-[180px]">{note.title}</span>
-                            <span className="text-[10px] text-zinc-500 shrink-0">{note.time}</span>
-                          </div>
-                        </SwipeRow>
-                      ))
-                    )}
-                  </div>
                 </section>
 
               </div>
