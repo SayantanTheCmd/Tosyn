@@ -39,7 +39,7 @@ export default function LoginPage() {
       if (code === "123456" || code.length === 6) {
         localStorage.setItem("access_token", "fake-jwt-token");
         setOtpStatus("success");
-        setTimeout(() => { window.location.href = "/dashboard"; }, 1000);
+        setTimeout(() => { window.location.href = "/select-exam"; }, 1000);
       } else {
         setOtpStatus("error");
         setTimeout(() => setOtpStatus("idle"), 2000);
@@ -53,7 +53,7 @@ export default function LoginPage() {
   const handleEmailSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    setTimeout(() => { window.location.href = "/dashboard"; }, 1000);
+    setTimeout(() => { window.location.href = "/select-exam"; }, 1000);
   };
 
   const containerVariants = {
