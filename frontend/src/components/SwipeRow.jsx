@@ -49,6 +49,34 @@ const watchWindow = live => {
   };
 };
 
+/**
+ * @param {Object} props
+ * @param {any} props.children
+ * @param {any[]} [props.actions]
+ * @param {string} [props.actionColor]
+ * @param {string} [props.drawerColor]
+ * @param {string} [props.rowColor]
+ * @param {string} [props.textColor]
+ * @param {number} [props.height]
+ * @param {number} [props.radius]
+ * @param {number} [props.actionWidth]
+ * @param {'left' | 'right'} [props.direction]
+ * @param {number} [props.snapBounce]
+ * @param {number} [props.resistance]
+ * @param {number} [props.collapseMs]
+ * @param {number} [props.commitAt]
+ * @param {boolean} [props.fullSwipe]
+ * @param {boolean} [props.disabled]
+ * @param {boolean} [props.open]
+ * @param {(open: boolean) => void} [props.onOpenChange]
+ * @param {(action: any) => void} [props.onAction]
+ * @param {(action: any) => void} [props.onCommit]
+ * @param {boolean} [props.closeOnAction]
+ * @param {boolean} [props.haptic]
+ * @param {string} [props.label]
+ * @param {string} [props.className]
+ * @param {any} [props.style]
+ */
 export default function SwipeRow({
   children,
   actions = DEFAULT_ACTIONS,

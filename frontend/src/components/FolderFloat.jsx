@@ -45,6 +45,37 @@ const layout = (list, spread, lift, tilt, sizes) => {
   return pos;
 };
 
+/**
+ * @param {Object} props
+ * @param {any[]} [props.items]
+ * @param {string} [props.label]
+ * @param {string} [props.sublabel]
+ * @param {'hover' | 'click'} [props.trigger]
+ * @param {boolean} [props.defaultOpen]
+ * @param {boolean} [props.closeOnSelect]
+ * @param {boolean} [props.physics]
+ * @param {number} [props.drift]
+ * @param {(item: any) => void} [props.onSelect]
+ * @param {(open: boolean) => void} [props.onOpenChange]
+ * @param {string} [props.folderColor]
+ * @param {string} [props.frontColor]
+ * @param {string} [props.paperColor]
+ * @param {string} [props.itemColor]
+ * @param {string} [props.itemTextColor]
+ * @param {string} [props.labelColor]
+ * @param {number} [props.width]
+ * @param {number} [props.height]
+ * @param {number} [props.radius]
+ * @param {number} [props.spread]
+ * @param {number} [props.lift]
+ * @param {number} [props.tilt]
+ * @param {number} [props.flapAngle]
+ * @param {number} [props.restAngle]
+ * @param {number} [props.openDuration]
+ * @param {number} [props.stagger]
+ * @param {number} [props.bounce]
+ * @param {string} [props.className]
+ */
 export default function FolderFloat({
   items = DEFAULT_ITEMS,
   label = 'Design feedback',
