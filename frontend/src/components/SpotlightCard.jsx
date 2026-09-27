@@ -1,7 +1,10 @@
 import { useRef } from 'react';
 import './SpotlightCard.css';
 
-const SpotlightCard = ({ children, className = '', spotlightColor = 'rgba(255, 255, 255, 0.25)' }) => {
+/**
+ * @param {{ children: React.ReactNode; className?: string; spotlightColor?: string; onClick?: React.MouseEventHandler<HTMLDivElement>; [key: string]: any }} props
+ */
+const SpotlightCard = ({ children, className = '', spotlightColor = 'rgba(255, 255, 255, 0.25)', onClick = undefined, ...props }) => {
   const divRef = useRef(null);
 
   const handleMouseMove = e => {
@@ -15,7 +18,7 @@ const SpotlightCard = ({ children, className = '', spotlightColor = 'rgba(255, 2
   };
 
   return (
-    <div ref={divRef} onMouseMove={handleMouseMove} className={`card-spotlight ${className}`}>
+    <div ref={divRef} onMouseMove={handleMouseMove} onClick={onClick} className={`card-spotlight ${className}`} {...props}>
       {children}
     </div>
   );

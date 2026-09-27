@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import SpotlightCard from "@/components/SpotlightCard";
+import Footer from "@/components/Footer";
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
   ArrowLeft02Icon,
@@ -31,6 +32,19 @@ export default function AboutPage() {
       instagramHandle: "@sayantan",
       github: "https://github.com",
       githubHandle: "Sayantan-Dev"
+    },
+    {
+      name: "Tosin M",
+      role: "Co-Creator & Strategic Director",
+      badge: "Guiding & Architecture",
+      badgeColor: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+      avatarBg: "from-purple-600 to-pink-600",
+      description:
+        "Plays a key role in overall website direction, strategic guidance, and technical implementation planning, sculpting RankTorque's user experience and learning workflow.",
+      instagram: "https://instagram.com",
+      instagramHandle: "@tosin_m",
+      github: "https://github.com",
+      githubHandle: "Tosin-M"
     }
   ];
 
@@ -182,6 +196,8 @@ export default function AboutPage() {
         </section>
 
       </main>
+
+      <Footer />
     </div>
   );
 }

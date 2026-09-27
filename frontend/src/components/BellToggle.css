@@ -60,10 +60,10 @@
   outline: none;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
-  clip-path: inset(0 var(--bt-clip) 0 0 round var(--bt-radius));
   transition:
     background-color var(--bt-fade) ease,
-    color var(--bt-fade) ease;
+    color var(--bt-fade) ease,
+    transform 160ms var(--bt-ease-out);
 }
 
 .bell-toggle__button:disabled {

@@ -9,6 +9,7 @@ import PeekRating from "@/components/PeekRating";
 import WarmTooltip from "@/components/WarmTooltip";
 import SpringCheck from "@/components/SpringCheck";
 import SwipeRow from "@/components/SwipeRow";
+import Footer from "@/components/Footer";
 
 import { HugeiconsIcon } from "@hugeicons/react";
 import {
@@ -419,6 +420,174 @@ export default function DashboardPage() {
             </form>
 
           </section>
+        ) : activeTab === "analytics" ? (
+          /* Full Page Analytics Studio View */
+          <section className="bg-[#0a0a0a] border border-white/[0.06] rounded-3xl p-8 shadow-2xl flex flex-col gap-8 max-w-6xl mx-auto w-full">
+            
+            {/* Header */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.06] pb-6">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center border border-purple-500/20 shadow-lg">
+                  <HugeiconsIcon icon={AnalyticsUpIcon} size={28} />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-white tracking-tight flex items-center gap-3">
+                    <span>Performance &amp; Percentile Analytics</span>
+                    <span className="text-xs px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20 font-bold uppercase tracking-wider">
+                      {track} 2026 Target
+                    </span>
+                  </h2>
+                  <p className="text-sm text-zinc-400">Deep breakdown of target scores, percentile predictions, and subject accuracy.</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-mono text-zinc-400 bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl">
+                  Target AIR: &lt; 500
+                </span>
+                <button
+                  type="button"
+                  onClick={() => router.push("/dashboard/pyqs/physics")}
+                  className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition-colors shadow-lg shadow-blue-600/30"
+                >
+                  Solve PYQs Now
+                </button>
+              </div>
+            </div>
+
+            {/* Target & Score Performance Banner */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
+              <div className="bg-[#050505] border border-white/10 rounded-2xl p-6 flex flex-col justify-between gap-3">
+                <span className="text-xs font-bold text-zinc-500 uppercase tracking-widest">Target Exam &amp; Track</span>
+                <div>
+                  <div className="text-3xl font-black text-white mb-1">{track} 2026</div>
+                  <p className="text-xs text-blue-400 font-semibold">{track === "JEE" ? "Engineering (PCM)" : "Medical (PCB)"}</p>
+                </div>
+                <div className="pt-3 border-t border-white/5 text-[11px] text-zinc-400">
+                  Countdown: <span className="text-white font-mono font-bold">142 Days Remaining</span>
+                </div>
+              </div>
+
+              <div className="bg-[#050505] border border-white/10 rounded-2xl p-6 flex flex-col justify-between gap-3">
+                <span className="text-xs font-bold text-zinc-500 uppercase tracking-widest">Predicted Percentile</span>
+                <div>
+                  <div className="text-3xl font-black text-purple-400 mb-1">99.45 %ile</div>
+                  <p className="text-xs text-zinc-400">Target Score: <span className="text-white font-bold">{track === "JEE" ? "245 / 300" : "675 / 720"}</span></p>
+                </div>
+                <div className="pt-3 border-t border-white/5 text-[11px] text-emerald-400 font-semibold">
+                  +1.2%ile increase over last 3 tests
+                </div>
+              </div>
+
+              <div className="bg-[#050505] border border-white/10 rounded-2xl p-6 flex flex-col justify-between gap-3">
+                <span className="text-xs font-bold text-zinc-500 uppercase tracking-widest">Questions Attempted</span>
+                <div>
+                  <div className="text-3xl font-black text-white mb-1">982</div>
+                  <p className="text-xs text-zinc-400">Total Solved / 2,650 Qs</p>
+                </div>
+                <div className="w-full bg-white/5 h-2 rounded-full overflow-hidden">
+                  <div className="bg-blue-500 h-full w-[37%]" />
+                </div>
+              </div>
+
+              <div className="bg-[#050505] border border-white/10 rounded-2xl p-6 flex flex-col justify-between gap-3">
+                <span className="text-xs font-bold text-zinc-500 uppercase tracking-widest">Overall Test Accuracy</span>
+                <div>
+                  <div className="text-3xl font-black text-emerald-400 mb-1">88.4%</div>
+                  <p className="text-xs text-zinc-400">Based on 12 Full Mock Tests</p>
+                </div>
+                <div className="pt-3 border-t border-white/5 text-[11px] text-zinc-400">
+                  Target Accuracy: <span className="text-emerald-400 font-bold">92%</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Subject-Wise Analytics Grid */}
+            <div className="flex flex-col gap-4">
+              <h3 className="text-lg font-bold text-white tracking-tight">Subject-wise Analytics &amp; Accuracy</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[
+                  { name: "Physics", accuracy: "91.2%", avgScore: "82/100", chapters: "30 Chapters", solved: "312", color: "border-blue-500/30 text-blue-400", bg: "bg-blue-500/10" },
+                  { name: "Chemistry", accuracy: "87.6%", avgScore: "78/100", chapters: "28 Chapters", solved: "420", color: "border-rose-500/30 text-rose-400", bg: "bg-rose-500/10" },
+                  { name: track === "NEET" ? "Biology" : "Mathematics", accuracy: "86.4%", avgScore: "74/100", chapters: track === "NEET" ? "38 Chapters" : "32 Chapters", solved: "250", color: "border-purple-500/30 text-purple-400", bg: "bg-purple-500/10" }
+                ].map(sub => (
+                  <SpotlightCard
+                    key={sub.name}
+                    className="bg-[#050505] border border-white/10 rounded-2xl p-6 flex flex-col gap-5"
+                  >
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-xl font-bold text-white">{sub.name}</h4>
+                      <span className={`text-xs font-bold px-3 py-1 rounded-full border ${sub.color} ${sub.bg}`}>
+                        {sub.accuracy} Accuracy
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3 text-xs">
+                      <div className="bg-white/[0.02] border border-white/5 rounded-xl p-3">
+                        <span className="text-zinc-500 block mb-1">Average Score</span>
+                        <span className="text-sm font-bold text-white">{sub.avgScore}</span>
+                      </div>
+                      <div className="bg-white/[0.02] border border-white/5 rounded-xl p-3">
+                        <span className="text-zinc-500 block mb-1">Solved PYQs</span>
+                        <span className="text-sm font-bold text-white">{sub.solved} Qs</span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between text-xs text-zinc-400 pt-2 border-t border-white/5">
+                      <span>Course Progress</span>
+                      <span className="text-zinc-200 font-semibold">{sub.chapters}</span>
+                    </div>
+                  </SpotlightCard>
+                ))}
+              </div>
+            </div>
+
+            {/* Recent Mock & PYQ Test Logs */}
+            <div className="flex flex-col gap-4">
+              <h3 className="text-lg font-bold text-white tracking-tight">Recent PYQ &amp; Mock Test Log</h3>
+              <div className="bg-[#050505] border border-white/10 rounded-2xl p-5 overflow-x-auto">
+                <table className="w-full text-left text-xs text-zinc-300">
+                  <thead className="border-b border-white/10 text-zinc-500 font-bold uppercase tracking-wider">
+                    <tr>
+                      <th className="pb-3 px-4">Test Title</th>
+                      <th className="pb-3 px-4">Target Exam</th>
+                      <th className="pb-3 px-4">Score</th>
+                      <th className="pb-3 px-4">Accuracy</th>
+                      <th className="pb-3 px-4">Predicted %ile</th>
+                      <th className="pb-3 px-4">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/5 font-mono">
+                    <tr>
+                      <td className="py-3.5 px-4 font-sans font-semibold text-white">NTA JEE Main 2025 (Jan 24 - Shift 1)</td>
+                      <td className="py-3.5 px-4 text-blue-400 font-bold">JEE Main</td>
+                      <td className="py-3.5 px-4 text-emerald-400 font-bold">18 / 20</td>
+                      <td className="py-3.5 px-4">90%</td>
+                      <td className="py-3.5 px-4 text-purple-400 font-bold">99.6 %ile</td>
+                      <td className="py-3.5 px-4 text-zinc-500">Today</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3.5 px-4 font-sans font-semibold text-white">AITS - Full Syllabus Mock 1</td>
+                      <td className="py-3.5 px-4 text-blue-400 font-bold">JEE Main</td>
+                      <td className="py-3.5 px-4 text-emerald-400 font-bold">236 / 300</td>
+                      <td className="py-3.5 px-4">88.5%</td>
+                      <td className="py-3.5 px-4 text-purple-400 font-bold">99.2 %ile</td>
+                      <td className="py-3.5 px-4 text-zinc-500">2 Days ago</td>
+                    </tr>
+                    <tr>
+                      <td className="py-3.5 px-4 font-sans font-semibold text-white">JEE Main 2024 (April 4 - Shift 1)</td>
+                      <td className="py-3.5 px-4 text-blue-400 font-bold">JEE Main</td>
+                      <td className="py-3.5 px-4 text-emerald-400 font-bold">16 / 20</td>
+                      <td className="py-3.5 px-4">85%</td>
+                      <td className="py-3.5 px-4 text-purple-400 font-bold">98.9 %ile</td>
+                      <td className="py-3.5 px-4 text-zinc-500">5 Days ago</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </section>
         ) : activeTab === "roughwork" ? (
           /* Full Page RoughWork Tab View */
           <section className="bg-[#0a0a0a] border border-white/[0.06] rounded-3xl p-8 shadow-2xl flex flex-col gap-8">
@@ -796,6 +965,8 @@ export default function DashboardPage() {
         )}
 
       </main>
+
+      <Footer />
     </div>
   );
 }
