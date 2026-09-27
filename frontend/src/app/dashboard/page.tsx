@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import JellyRadio from "@/components/JellyRadio";
 import BellToggle from "@/components/BellToggle";
 import SpotlightCard from "@/components/SpotlightCard";
-import FolderFloat from "@/components/FolderFloat";
 import PeekRating from "@/components/PeekRating";
 import WarmTooltip from "@/components/WarmTooltip";
 import SpringCheck from "@/components/SpringCheck";
@@ -26,12 +25,13 @@ import {
   PencilEdit02Icon,
   AiSparklesIcon
 } from "@hugeicons/core-free-icons";
-import { motion, AnimatePresence } from "framer-motion";
 
 export default function DashboardPage() {
   const router = useRouter();
   const [track, setTrack] = useState<"JEE" | "NEET">("JEE");
   const [bellPressed, setBellPressed] = useState(false);
+  const [userName, setUserName] = useState("Sayantan");
+  const [greeting, setGreeting] = useState("Welcome back");
 
   // Subject priorities (customizable via PeekRating)
   const [priorities, setPriorities] = useState<Record<string, number>>({
@@ -56,15 +56,20 @@ export default function DashboardPage() {
     { id: 2, title: "Thermodynamics heat capacity notes", time: "Yesterday" }
   ]);
 
-  // Simulated Payment Modal state
-  const [checkoutBundle, setCheckoutBundle] = useState<any>(null);
-  const [paymentState, setPaymentState] = useState<"idle" | "processing" | "success">("idle");
-
   useEffect(() => {
     const selected = localStorage.getItem("selectedExam") as "JEE" | "NEET";
     if (selected === "JEE" || selected === "NEET") {
       setTrack(selected);
     }
+    const storedName = localStorage.getItem("user_name");
+    if (storedName) {
+      setUserName(storedName);
+    }
+
+    const hour = new Date().getHours();
+    if (hour < 12) setGreeting("Good morning");
+    else if (hour < 18) setGreeting("Good afternoon");
+    else setGreeting("Good evening");
   }, []);
 
   const navItems = [
@@ -149,36 +154,6 @@ export default function DashboardPage() {
     { id: 3, title: "High-Speed Accuracy Sprint Mock", questions: "30 Questions", duration: "45 Mins", difficulty: "Rank Booster" }
   ];
 
-  // Flagship Paid Bundles featuring FolderFloat
-  const paidBundles = [
-    {
-      id: "bundle-1",
-      title: `${track} 2026 Rank Booster Vault`,
-      desc: "Top 500 AIR curated problem bank with interactive step-by-step video solutions.",
-      price: "₹2,499",
-      materials: ["Mechanics Elite Bank.pdf", "Organic Mechanisms Map", "Toppers Formula Book", "PYQ 2015-2025 Solved"],
-      folderColor: "#1e1b4b",
-      frontColor: "#312e81"
-    },
-    {
-      id: "bundle-2",
-      title: "All India Test Series (AITS Pro)",
-      desc: "25 Full length computer-based tests matching actual NTA simulation engine.",
-      price: "₹1,999",
-      materials: ["25 Full Mock Tests", "Predictive AIR Analytics", "Weak Topic Diagnostic", "OMR & Answer Keys"],
-      folderColor: "#14532d",
-      frontColor: "#166534"
-    }
-  ];
-
-  const handleStartPayment = (bundle: any) => {
-    setCheckoutBundle(bundle);
-    setPaymentState("processing");
-    setTimeout(() => {
-      setPaymentState("success");
-    }, 2000);
-  };
-
   const handleAddTask = (e: React.FormEvent) => {
     e.preventDefault();
     if (!newTaskText.trim()) return;
@@ -198,49 +173,6 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-[#050505] text-zinc-100 flex flex-col font-sans selection:bg-blue-500/30 selection:text-blue-200">
-
-      {/* Simulated Checkout Modal */}
-      <AnimatePresence>
-        {checkoutBundle && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
-          >
-            <motion.div
-              initial={{ scale: 0.95, y: 15 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 15 }}
-              className="w-full max-w-md bg-[#0a0a0a] border border-white/10 rounded-3xl p-8 flex flex-col items-center text-center shadow-2xl relative overflow-hidden"
-            >
-              <div className={`absolute top-[-50%] left-[-50%] w-[200%] h-[200%] opacity-20 blur-[100px] pointer-events-none transition-colors duration-1000 ${paymentState === 'success' ? 'bg-green-500' : 'bg-blue-500'}`} />
-
-              {paymentState === "processing" ? (
-                <div className="py-8 flex flex-col items-center">
-                  <div className="w-16 h-16 rounded-full border-4 border-white/10 border-t-blue-500 animate-spin mb-6" />
-                  <h3 className="text-xl font-bold text-white mb-2">Simulating Secure Payment...</h3>
-                  <p className="text-sm text-zinc-400">Locking in access to <strong className="text-white">{checkoutBundle.title}</strong>.</p>
-                </div>
-              ) : (
-                <div className="py-4 flex flex-col items-center">
-                  <div className="w-16 h-16 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(34,197,94,0.3)]">
-                    <HugeiconsIcon icon={Tick02Icon} className="text-green-400" size={32} />
-                  </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Access Granted!</h3>
-                  <p className="text-sm text-zinc-400 mb-6">You have unlocked <strong className="text-white">{checkoutBundle.title}</strong>. Study materials and mock tests are now permanently accessible.</p>
-                  <button
-                    onClick={() => { setCheckoutBundle(null); setPaymentState("idle"); }}
-                    className="w-full py-4 rounded-xl bg-white text-black font-bold hover:bg-zinc-200 transition-colors shadow-lg"
-                  >
-                    Start Studying
-                  </button>
-                </div>
-              )}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Modern Dashboard Header */}
       <header className="flex justify-between items-center px-6 md:px-12 py-4 border-b border-white/[0.06] bg-[#050505]/80 backdrop-blur-xl sticky top-0 z-50">
@@ -263,6 +195,13 @@ export default function DashboardPage() {
         </div>
 
         <div className="flex items-center gap-4 md:gap-6">
+          <button
+            onClick={() => router.push("/about")}
+            className="text-xs font-semibold text-zinc-400 hover:text-white transition-colors px-3 py-1.5 rounded-lg hover:bg-white/5"
+          >
+            About &amp; Contact
+          </button>
+
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold">
             <HugeiconsIcon icon={FireIcon} size={16} />
             <span>14 Day Streak</span>
@@ -276,7 +215,11 @@ export default function DashboardPage() {
             onChange={(pressed: boolean) => setBellPressed(pressed)}
           />
 
-          <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-zinc-800 to-zinc-700 border border-white/10 flex items-center justify-center cursor-pointer hover:border-white/30 transition-colors">
+          <div 
+            onClick={() => router.push("/about")}
+            className="w-9 h-9 rounded-full bg-gradient-to-tr from-zinc-800 to-zinc-700 border border-white/10 flex items-center justify-center cursor-pointer hover:border-white/30 transition-colors"
+            title="Profile &amp; About"
+          >
             <HugeiconsIcon icon={UserCircleIcon} size={18} className="text-zinc-300" />
           </div>
         </div>
@@ -284,6 +227,28 @@ export default function DashboardPage() {
 
       {/* Main Container */}
       <main className="flex-1 w-full max-w-[1550px] mx-auto p-6 md:p-10 flex flex-col gap-10">
+
+        {/* Personalized Welcome Banner */}
+        <section className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/[0.04] pb-6">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight flex items-center gap-2">
+              {greeting}, <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-300 to-white">{userName}</span> 👋
+            </h2>
+            <p className="text-sm text-zinc-400 mt-1">
+              Ready to conquer <strong className="text-white">{track} 2026</strong>? Focus on high-priority topics and daily consistency.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => router.push("/dashboard/mock-test")}
+              className="px-5 py-2.5 rounded-xl bg-white text-black font-bold text-xs hover:bg-zinc-200 transition-colors shadow-lg flex items-center gap-2"
+            >
+              <HugeiconsIcon icon={PlayIcon} size={14} />
+              <span>Launch Mock Test</span>
+            </button>
+          </div>
+        </section>
 
         {/* Quick Insights Banner */}
         <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -312,7 +277,7 @@ export default function DashboardPage() {
         {/* 2-Column Responsive Workspace */}
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
 
-          {/* Left Main Area: Subject Practice, Mock Tests & Bundles (8 cols) */}
+          {/* Left Main Area: Subject Practice & Mock Tests (8 cols) */}
           <div className="xl:col-span-8 flex flex-col gap-10">
 
             {/* Subject Practice & Priority List */}
@@ -389,7 +354,7 @@ export default function DashboardPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-2xl font-bold tracking-tight text-white mb-1">Interactive Mock Tests</h2>
-                  <p className="text-sm text-zinc-400">Real NTA exam simulation with live Stepper progression.</p>
+                  <p className="text-sm text-zinc-400">Real NTA exam simulation with live Stepper progression and instant grading.</p>
                 </div>
                 <button
                   onClick={() => router.push("/dashboard/mock-test")}
@@ -424,55 +389,6 @@ export default function DashboardPage() {
                       <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-blue-500 group-hover:text-white transition-all">
                         <HugeiconsIcon icon={PlayIcon} size={14} />
                       </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Flagship Crash Courses with FolderFloat */}
-            <section className="flex flex-col gap-6">
-              <div>
-                <h2 className="text-2xl font-bold tracking-tight text-white mb-1">High-Yield Course Bundles</h2>
-                <p className="text-sm text-zinc-400">Hover or click each folder to reveal problem sets, formula mindmaps, and mock papers.</p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {paidBundles.map(bundle => (
-                  <div
-                    key={bundle.id}
-                    className="bg-[#0a0a0a] border border-white/[0.07] rounded-3xl p-7 flex flex-col relative group hover:border-white/20 transition-all shadow-2xl"
-                  >
-                    {/* FolderFloat Container without overflow clipping */}
-                    <div className="w-full h-56 mb-4 rounded-2xl bg-[#050505] border border-white/[0.04] flex items-end pb-4 justify-center relative shadow-inner overflow-visible">
-                      <div className="scale-[0.85] origin-bottom relative z-10">
-                        <FolderFloat
-                          label="Hover to reveal files"
-                          items={bundle.materials}
-                          folderColor={bundle.folderColor}
-                          frontColor={bundle.frontColor}
-                          onSelect={() => {}}
-                          onOpenChange={() => {}}
-                        />
-                      </div>
-                    </div>
-
-                    <div className="flex flex-col gap-2 z-10 flex-1">
-                      <h3 className="text-xl font-bold text-white tracking-tight">{bundle.title}</h3>
-                      <p className="text-sm text-zinc-400 leading-relaxed mb-4">{bundle.desc}</p>
-                    </div>
-
-                    <div className="z-10 mt-auto pt-4 border-t border-white/[0.04] flex items-center justify-between">
-                      <div>
-                        <span className="text-[10px] uppercase font-bold text-zinc-500 tracking-wider block">Price</span>
-                        <span className="text-2xl font-black text-white">{bundle.price}</span>
-                      </div>
-                      <button
-                        onClick={() => handleStartPayment(bundle)}
-                        className="px-6 py-3 rounded-xl bg-white text-black font-bold text-sm hover:bg-zinc-200 transition-colors shadow-lg"
-                      >
-                        Enroll Now
-                      </button>
                     </div>
                   </div>
                 ))}

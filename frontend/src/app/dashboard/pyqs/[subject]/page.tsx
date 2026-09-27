@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { ArrowLeft01Icon, Time01Icon, HelpCircleIcon } from "@hugeicons/core-free-icons";
+import { ArrowLeft01Icon, Time01Icon, HelpCircleIcon, Alert02Icon } from "@hugeicons/core-free-icons";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Mock Question Bank
 const mockQuestions: Record<string, any[]> = {
@@ -33,6 +34,7 @@ export default function PYQTestPage() {
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [status, setStatus] = useState<Record<number, "answered" | "review" | "unanswered" | "not_visited">>({});
   const [timeLeft, setTimeLeft] = useState(3600); // 60 mins
+  const [showQuitModal, setShowQuitModal] = useState(false);
   
   useEffect(() => {
     // Initialize status
@@ -89,11 +91,61 @@ export default function PYQTestPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-zinc-100 flex flex-col font-sans selection:bg-blue-500/30 selection:text-blue-200">
+    <div className="min-h-screen bg-[#050505] text-zinc-100 flex flex-col font-sans selection:bg-blue-500/30 selection:text-blue-200 relative">
+      {/* Quit Warning Modal */}
+      <AnimatePresence>
+        {showQuitModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 15 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 15 }}
+              className="w-full max-w-md bg-[#0d0d0f] border border-white/10 rounded-3xl p-7 flex flex-col items-center text-center shadow-2xl relative overflow-hidden"
+            >
+              <div className="w-14 h-14 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center mb-5 shadow-[0_0_20px_rgba(245,158,11,0.2)]">
+                <HugeiconsIcon icon={Alert02Icon} size={28} />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Quit Practice Session?</h3>
+              <p className="text-sm text-zinc-400 leading-relaxed mb-6">
+                Are you sure you want to quit? Your current test responses and progress will not be saved.
+              </p>
+              <div className="flex items-center gap-3 w-full">
+                <button
+                  type="button"
+                  onClick={() => setShowQuitModal(false)}
+                  className="flex-1 py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-zinc-200 font-semibold text-sm transition-colors border border-white/5"
+                >
+                  Resume Test
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowQuitModal(false);
+                    router.push('/dashboard');
+                  }}
+                  className="flex-1 py-3 px-4 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-semibold text-sm transition-colors shadow-lg shadow-rose-600/30"
+                >
+                  Quit to Dashboard
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Test Header */}
       <header className="flex justify-between items-center px-6 py-4 border-b border-white/[0.04] bg-[#0a0a0a]">
         <div className="flex items-center gap-4">
-          <button onClick={() => router.push('/dashboard')} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
+          <button 
+            onClick={() => setShowQuitModal(true)} 
+            className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"
+            title="Back to Dashboard"
+          >
             <HugeiconsIcon icon={ArrowLeft01Icon} size={20} />
           </button>
           <div>
