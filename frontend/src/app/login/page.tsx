@@ -77,9 +77,9 @@ export default function LoginPage() {
 
         <div className="z-10 flex items-center gap-3">
           <div className="w-9 h-9 bg-white text-black rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-            <span className="font-black text-xl tracking-tighter leading-none">T</span>
+            <span className="font-black text-xl tracking-tighter leading-none">R</span>
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">ToSyn</h1>
+          <h1 className="text-2xl font-bold tracking-tight text-white">RankTorque</h1>
         </div>
         
         <div className="z-10 w-full mb-12 flex flex-col justify-center h-full">
@@ -90,12 +90,12 @@ export default function LoginPage() {
             </span>
           </h2>
           <p className="text-lg lg:text-xl text-zinc-400 font-medium max-w-md leading-relaxed">
-            The ToSyn aim is to democratize elite-tier education. We fuse cutting-edge software with world-class curriculum to unlock your true potential.
+            The RankTorque mission is to empower competitive exam aspirants with distraction-free, high-precision problem-solving tools.
           </p>
         </div>
 
         <div className="z-10 flex items-center gap-6 text-sm font-medium text-zinc-600">
-          <span className="text-zinc-500">© 2026 ToSyn</span>
+          <span className="text-zinc-500">© 2026 RankTorque</span>
           <a href="#" className="hover:text-zinc-300 transition-colors">Privacy</a>
           <a href="#" className="hover:text-zinc-300 transition-colors">Terms</a>
         </div>

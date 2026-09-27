@@ -179,7 +179,7 @@ export default function DashboardPage() {
         <div className="flex items-center gap-8">
           <div className="flex items-center gap-3">
             <h1 className="text-xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-zinc-400">
-              ToSyn
+              RankTorque
             </h1>
             <button
               onClick={() => router.push("/select-exam")}
