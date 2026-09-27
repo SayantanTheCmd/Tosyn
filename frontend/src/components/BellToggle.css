@@ -41,6 +41,7 @@
 .bell-toggle__button {
   grid-area: 1 / 1;
   display: inline-flex;
+  flex-direction: row-reverse;
   align-items: center;
   gap: var(--bt-gap);
   height: var(--bt-h);
@@ -60,7 +61,7 @@
   outline: none;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
-  clip-path: inset(0 var(--bt-clip) 0 0 round var(--bt-radius));
+  clip-path: inset(0 0 0 var(--bt-clip) round var(--bt-radius));
   transition:
     background-color var(--bt-fade) ease,
     color var(--bt-fade) ease;

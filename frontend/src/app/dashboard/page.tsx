@@ -121,7 +121,7 @@ export default function DashboardPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {tests.map(test => (
-              <div key={test.id} className="bg-[#0a0a0a] border border-white/[0.06] rounded-2xl p-5 hover:bg-[#111] transition-all cursor-pointer group flex items-center justify-between shadow-lg shadow-black/50 hover:border-white/10">
+              <a href="/dashboard/mock-test" key={test.id} className="bg-[#0a0a0a] border border-white/[0.06] rounded-2xl p-5 hover:bg-[#111] transition-all cursor-pointer group flex items-center justify-between shadow-lg shadow-black/50 hover:border-white/10 block">
                 <div>
                   <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 mb-2 block">{test.type}</span>
                   <h3 className="font-medium text-zinc-200 group-hover:text-white transition-colors">{test.title}</h3>
@@ -129,7 +129,7 @@ export default function DashboardPage() {
                 <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
                   <HugeiconsIcon icon={PlayIcon} size={18} />
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </section>
