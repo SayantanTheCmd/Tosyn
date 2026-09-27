@@ -21,7 +21,7 @@ export default function AboutPage() {
   const creators = [
     {
       name: "Sayantan",
-      role: "Creator & Product Architect",
+      role: "Creator & Lead Product Architect",
       badge: "Founder",
       badgeColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
       avatarBg: "from-blue-600 to-indigo-600",
@@ -31,19 +31,6 @@ export default function AboutPage() {
       instagramHandle: "@sayantan",
       github: "https://github.com",
       githubHandle: "Sayantan-Dev"
-    },
-    {
-      name: "Antigravity",
-      role: "AI Pair Programmer & System Operator",
-      badge: "Google DeepMind",
-      badgeColor: "bg-purple-500/10 text-purple-400 border-purple-500/20",
-      avatarBg: "from-purple-600 to-pink-600",
-      description:
-        "Autonomous Advanced Agentic AI system by Google DeepMind, co-architecting interactive React Bits UI components, local-first workflows, and responsive mock-testing logic.",
-      instagram: "https://instagram.com/google",
-      instagramHandle: "@googledeepmind",
-      github: "https://github.com/google-deepmind",
-      githubHandle: "google-deepmind"
     }
   ];
 

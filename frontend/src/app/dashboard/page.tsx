@@ -23,7 +23,10 @@ import {
   FireIcon,
   Add01Icon,
   PencilEdit02Icon,
-  AiSparklesIcon
+  AiSparklesIcon,
+  ShieldKeyIcon,
+  Mail01Icon,
+  SmartPhone01Icon
 } from "@hugeicons/core-free-icons";
 
 export default function DashboardPage() {
@@ -33,6 +36,15 @@ export default function DashboardPage() {
   const [bellPressed, setBellPressed] = useState(false);
   const [userName, setUserName] = useState("Sayantan");
   const [greeting, setGreeting] = useState("Welcome back");
+
+  // User Profile Form State
+  const [profileName, setProfileName] = useState("Sayantan");
+  const [profileEmail, setProfileEmail] = useState("sayantan@ranktorque.in");
+  const [profilePhone, setProfilePhone] = useState("9876543210");
+  const [profileExam, setProfileExam] = useState<"JEE" | "NEET">("JEE");
+  const [profileYear, setProfileYear] = useState("2026");
+  const [profilePassword, setProfilePassword] = useState("••••••••");
+  const [profileSavedMsg, setProfileSavedMsg] = useState(false);
 
   // Subject priorities (customizable via PeekRating)
   const [priorities, setPriorities] = useState<Record<string, number>>({
@@ -61,11 +73,21 @@ export default function DashboardPage() {
     const selected = localStorage.getItem("selectedExam") as "JEE" | "NEET";
     if (selected === "JEE" || selected === "NEET") {
       setTrack(selected);
+      setProfileExam(selected);
     }
     const storedName = localStorage.getItem("user_name");
     if (storedName) {
       setUserName(storedName);
+      setProfileName(storedName);
     }
+    const storedEmail = localStorage.getItem("user_email");
+    if (storedEmail) setProfileEmail(storedEmail);
+
+    const storedPhone = localStorage.getItem("user_phone");
+    if (storedPhone) setProfilePhone(storedPhone);
+
+    const storedYear = localStorage.getItem("user_target_year");
+    if (storedYear) setProfileYear(storedYear);
 
     const hour = new Date().getHours();
     if (hour < 12) setGreeting("Good morning");
@@ -173,6 +195,21 @@ export default function DashboardPage() {
     setSavedNotes(prev => prev.filter(n => n.id !== id));
   };
 
+  const handleSaveProfile = (e: React.FormEvent) => {
+    e.preventDefault();
+    localStorage.setItem("user_name", profileName);
+    localStorage.setItem("user_email", profileEmail);
+    localStorage.setItem("user_phone", profilePhone);
+    localStorage.setItem("selectedExam", profileExam);
+    localStorage.setItem("user_target_year", profileYear);
+    localStorage.setItem("user_password", profilePassword);
+    
+    setUserName(profileName);
+    setTrack(profileExam);
+    setProfileSavedMsg(true);
+    setTimeout(() => setProfileSavedMsg(false), 3000);
+  };
+
   return (
     <div className="min-h-screen bg-[#050505] text-zinc-100 flex flex-col font-sans selection:bg-blue-500/30 selection:text-blue-200">
 
@@ -223,11 +260,11 @@ export default function DashboardPage() {
           />
 
           <div 
-            onClick={() => router.push("/about")}
-            className="w-9 h-9 rounded-full bg-gradient-to-tr from-zinc-800 to-zinc-700 border border-white/10 flex items-center justify-center cursor-pointer hover:border-white/30 transition-colors"
-            title="Profile &amp; About"
+            onClick={() => setActiveTab("profile")}
+            className="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 border border-white/20 flex items-center justify-center cursor-pointer hover:border-white/40 transition-colors text-white font-bold text-sm shadow-md"
+            title="User Account Profile"
           >
-            <HugeiconsIcon icon={UserCircleIcon} size={18} className="text-zinc-300" />
+            {userName[0]}
           </div>
         </div>
       </header>
@@ -258,7 +295,131 @@ export default function DashboardPage() {
         </section>
 
         {/* Dedicated Tab Views */}
-        {activeTab === "roughwork" ? (
+        {activeTab === "profile" ? (
+          /* Full-Fledged User Account Profile View */
+          <section className="bg-[#0a0a0a] border border-white/[0.06] rounded-3xl p-8 shadow-2xl flex flex-col gap-8 max-w-5xl mx-auto w-full">
+            
+            {/* Account Header */}
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border-b border-white/[0.06] pb-6">
+              <div className="flex items-center gap-5">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-bold text-2xl flex items-center justify-center shadow-lg shadow-blue-500/20 border border-white/20">
+                  {profileName[0]}
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-white tracking-tight">{profileName}</h2>
+                  <p className="text-sm text-zinc-400">{profileEmail} • Target {profileExam} {profileYear}</p>
+                </div>
+              </div>
+
+              <span className="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 text-xs font-bold uppercase tracking-wider">
+                {profileExam} Aspirant Account
+              </span>
+            </div>
+
+            {profileSavedMsg && (
+              <div className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-4 py-3 rounded-2xl text-sm font-semibold flex items-center gap-2">
+                <HugeiconsIcon icon={Tick02Icon} size={18} />
+                <span>Account Profile changes saved successfully!</span>
+              </div>
+            )}
+
+            {/* Profile Edit Form */}
+            <form onSubmit={handleSaveProfile} className="flex flex-col gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Full Name</label>
+                  <input
+                    type="text"
+                    value={profileName}
+                    onChange={e => setProfileName(e.target.value)}
+                    className="bg-[#050505] border border-white/10 rounded-2xl px-4 py-3.5 text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500 text-sm"
+                    required
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Email Address</label>
+                  <input
+                    type="email"
+                    value={profileEmail}
+                    onChange={e => setProfileEmail(e.target.value)}
+                    className="bg-[#050505] border border-white/10 rounded-2xl px-4 py-3.5 text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500 text-sm"
+                    required
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Phone Number</label>
+                  <input
+                    type="tel"
+                    value={profilePhone}
+                    onChange={e => setProfilePhone(e.target.value)}
+                    className="bg-[#050505] border border-white/10 rounded-2xl px-4 py-3.5 text-white placeholder-zinc-600 focus:outline-none focus:border-blue-500 text-sm font-mono"
+                    required
+                  />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Target Exam Track</label>
+                  <select
+                    value={profileExam}
+                    onChange={e => setProfileExam(e.target.value as "JEE" | "NEET")}
+                    className="bg-[#050505] border border-white/10 rounded-2xl px-4 py-3.5 text-white focus:outline-none focus:border-blue-500 text-sm"
+                  >
+                    <option value="JEE">JEE (PCM - Engineering)</option>
+                    <option value="NEET">NEET (PCB - Medical)</option>
+                  </select>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Target Exam Year</label>
+                  <select
+                    value={profileYear}
+                    onChange={e => setProfileYear(e.target.value)}
+                    className="bg-[#050505] border border-white/10 rounded-2xl px-4 py-3.5 text-white focus:outline-none focus:border-blue-500 text-sm"
+                  >
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                  </select>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Account Password</label>
+                  <input
+                    type="password"
+                    value={profilePassword}
+                    onChange={e => setProfilePassword(e.target.value)}
+                    className="bg-[#050505] border border-white/10 rounded-2xl px-4 py-3.5 text-white focus:outline-none focus:border-blue-500 text-sm"
+                    required
+                  />
+                </div>
+
+              </div>
+
+              <div className="flex items-center justify-between pt-4 border-t border-white/[0.06]">
+                <button
+                  type="button"
+                  onClick={() => {
+                    localStorage.clear();
+                    window.location.href = "/login";
+                  }}
+                  className="px-5 py-3 rounded-2xl bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 font-semibold text-xs border border-rose-500/20 transition-colors"
+                >
+                  Sign Out of Account
+                </button>
+
+                <button
+                  type="submit"
+                  className="px-8 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm transition-colors shadow-lg shadow-blue-600/30"
+                >
+                  Save Profile Changes
+                </button>
+              </div>
+            </form>
+
+          </section>
+        ) : activeTab === "roughwork" ? (
           /* Full Page RoughWork Tab View */
           <section className="bg-[#0a0a0a] border border-white/[0.06] rounded-3xl p-8 shadow-2xl flex flex-col gap-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.06] pb-6">
